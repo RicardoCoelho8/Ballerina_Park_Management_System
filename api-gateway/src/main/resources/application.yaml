@@ -1,0 +1,22 @@
+spring:
+  application:
+    name: API-GATEWAY
+  cloud:
+    gateway:
+      globalcors:
+        corsConfigurations:
+          '[/**]':
+            allowedOrigins: "*"
+            allowedMethods: "*"
+            allowedHeaders: "*"
+
+server:
+  port: 8080
+eureka:
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    preferIpAddress: true
+    instanceId: 
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka

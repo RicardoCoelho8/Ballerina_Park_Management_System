@@ -1,0 +1,1702 @@
+{
+	"info": {
+		"_postman_id": "ae89c30c-8909-4d51-8514-a888d187d85f",
+		"name": "LABSOFT",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "18345310"
+	},
+	"item": [
+		{
+			"name": "USER",
+			"item": [
+				{
+					"name": "Register/Creates Customer",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"firstName\": \"John\",\r\n  \"lastName\": \"Doe\",\r\n  \"email\": \"john.doe@isep.ipp.pt\",\r\n  \"password\": \"123PasswordX#\",\r\n  \"accountNumber\": \"1234567890\",\r\n  \"nif\": 123456789,\r\n  \"licensePlateNumber\": \"AB-12-AA\",\r\n  \"vehicleType\": \"AUTOMOBILE\",\r\n  \"vehicleEnergySource\": \"FUEL\",\r\n  \"paymentMethod\": \"NOT_DEFINED\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Ger all users",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{bearer_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-UserRole",
+								"value": "{{user_role}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add vehicle for the user",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{bearer_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "X-UserRole",
+								"value": "{{user_role}}",
+								"type": "text"
+							},
+							{
+								"key": "X-UserId",
+								"value": "{{user_id}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"licensePlateNumber\": \"ZZ-45-XA\",\r\n  \"vehicleType\": \"MOTORCYCLE\",\r\n  \"vehicleEnergySource\": \"GPL\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/users/{{user_id}}/vehicle",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"users",
+								"{{user_id}}",
+								"vehicle"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Change payment method",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{bearer_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "X-UserRole",
+								"value": "{{user_role}}",
+								"type": "text"
+							},
+							{
+								"key": "X-UserId",
+								"value": "{{user_id}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"paymentMethod\": \"DEBIT\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/users/{{user_id}}/payment-method",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"users",
+								"{{user_id}}",
+								"payment-method"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all user vehicles",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{bearer_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-UserRole",
+								"value": "{{user_role}}",
+								"type": "text"
+							},
+							{
+								"key": "X-UserId",
+								"value": "{{user_id}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/users/{{user_id}}/vehicles",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"users",
+								"{{user_id}}",
+								"vehicles"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add parkies (SINGULAR AND BULK)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{bearer_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userIds\" : [1,2,3],\r\n    \"amount\" : 50,\r\n    \"reason\" : \"For outstanding contributions to the park\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/users/parkies",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"users",
+								"parkies"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET PARKY WALLET OF USER",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{bearer_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userIds\" : [1,2,3],\r\n    \"amount\" : 50,\r\n    \"reason\" : \"For outstanding contributions to the park\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/users/parkies/{{user_id}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"users",
+								"parkies",
+								"{{user_id}}"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "PARK",
+			"item": [
+				{
+					"name": "Get all occupancies from all parks",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{bearer_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/parks/getAllOccupancies",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"parks",
+								"getAllOccupancies"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all price table entries by park id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{bearer_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/parks/getAllPriceTableEntries/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"parks",
+								"getAllPriceTableEntries",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all nearby parks occupancy and distance",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{bearer_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/parks/real-time/occupancy/41.178496516445534/-8.607637458224238/1500",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"parks",
+								"real-time",
+								"occupancy",
+								"41.178496516445534",
+								"-8.607637458224238",
+								"1500"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all parking history by customer id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{bearer_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/parks/parkingHistory/{{user_id}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"parks",
+								"parkingHistory",
+								"{{user_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get spots by park number",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{bearer_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/parks/getSpotsByParkNumber/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"parks",
+								"getSpotsByParkNumber",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get parky thresholds by park number",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{bearer_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/parks/getParkyThresholds/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"parks",
+								"getParkyThresholds",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get overnight fee configs by park number",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{bearer_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/parks/getOvernightConfig/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"parks",
+								"getOvernightConfig",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all parks",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{bearer_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/parks/getAllParks",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"parks",
+								"getAllParks"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get quantity of history by customer id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{bearer_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/parks/getQuantityOfHistoryByCustomerID/3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"parks",
+								"getQuantityOfHistoryByCustomerID",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get user parky flag by customer id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{bearer_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/parks/getUserParkyFlag/5",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"parks",
+								"getUserParkyFlag",
+								"5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Enable/Disable parking spot",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{bearer_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"parkNumber\":\"1\",\r\n    \"spotNumber\":\"A3\",\r\n    \"operational\":true,\r\n    \"managerName\":\"Toni\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/parks/enableDisableSpot",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"parks",
+								"enableDisableSpot"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Enable/Disable overnight fee by park number",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{bearer_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"parkNumber\": \"1\",\r\n    \"status\": false\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/parks/enableDisableOvernightFee",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"parks",
+								"enableDisableOvernightFee"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Change parky thresholds by park number",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{bearer_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"parkiesPerHour\":\"10\",\r\n    \"parkiesPerMinute\":\"1\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/parks/changeParkyThresholds/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"parks",
+								"changeParkyThresholds",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Change overnight fee price by park number",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{bearer_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"parkNumber\": \"1\",\r\n    \"price\": 100\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/parks/changeOvernightFeePrice",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"parks",
+								"changeOvernightFeePrice"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Change Time Periods of Park",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Response status code is 200\", function () {",
+									"    pm.expect(pm.response.code).to.equal(200);",
+									"});",
+									"",
+									"pm.test(\"ParkId, periodStart, and periodEnd fields should exist\", function () {",
+									"    const responseData = pm.response.json();",
+									"    ",
+									"    pm.expect(responseData).to.be.an('array');",
+									"    responseData.forEach(function(item) {",
+									"        pm.expect(item.parkId).to.exist;",
+									"        pm.expect(item.periodStart).to.exist;",
+									"        pm.expect(item.periodEnd).to.exist;",
+									"    });",
+									"});",
+									"",
+									"",
+									"pm.test(\"Thresholds array is present and contains the expected number of elements\", function () {",
+									"    const responseData = pm.response.json();",
+									"    ",
+									"    pm.expect(responseData).to.be.an('array');",
+									"    pm.expect(responseData[0].thresholds).to.exist.and.to.be.an('array');",
+									"});",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{bearer_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\r\n {\r\n    \"parkId\": 2,\r\n    \"periodStart\": \"08:30\",\r\n    \"periodEnd\": \"09:30\",\r\n    \"thresholds\": [\r\n        {\r\n            \"thresholdMinutes\": \"15\",\r\n            \"costPerMinuteAutomobiles\": \"0.30\" ,\r\n            \"costPerMinuteMotorcycles\": \"0.30\"\r\n        }\r\n    ]\r\n },\r\n {\r\n    \"parkId\": 2,\r\n    \"periodStart\": \"09:30\",\r\n    \"periodEnd\": \"8:30\",\r\n    \"thresholds\": [\r\n        {\r\n            \"thresholdMinutes\": \"30\",\r\n            \"costPerMinuteAutomobiles\": \"0.30\" ,\r\n            \"costPerMinuteMotorcycles\": \"0.30\"\r\n        }\r\n    ]\r\n }          \r\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/parks/defineTimePeriods/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"parks",
+								"defineTimePeriods",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Change user parky flag by customer id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{bearer_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "X-UserRole",
+								"value": "{{user_role}}",
+								"type": "text"
+							},
+							{
+								"key": "X-UserId",
+								"value": "{{user_id}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"customerID\": \"5\",\r\n  \"parkyFlag\": true\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/parks/changeUserParkyFlag",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"parks",
+								"changeUserParkyFlag"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Entrance Optical Reader",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"barrierID\": 1,\r\n  \"parkID\": 1,\r\n  \"parkNumber\": 1,\r\n  \"plateNumber\": \"28-XQ-51\",\r\n  \"date\": \"2023-11-26T12:34:56.789Z\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/barriers/entrance",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"barriers",
+								"entrance"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Exit Optical Reader",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"barrierID\": 2,\r\n  \"parkID\": 1,\r\n  \"parkNumber\": 1,\r\n  \"plateNumber\": \"28-XQ-51\",\r\n  \"date\": \"2023-11-26T15:34:56.789Z\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/barriers/exit",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"barriers",
+								"exit"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Display",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"barrierID\": 2,\r\n  \"parkID\": 1,\r\n  \"parkNumber\": 1,\r\n  \"plateNumber\": \"55-ND-41\",\r\n  \"message\": \"Teste\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/display/update",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"display",
+								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Display",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"displayID\": 1\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/display/get",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"display",
+								"get"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "PAYMENTS",
+			"item": [
+				{
+					"name": "create payment from information from of the barrier",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var responseData = pm.response.json();",
+									"",
+									"pm.test('There should exist 4 periods', function() {",
+									"    pm.expect(responseData.paymentsTableRowsDTO).to.be.an('array');",
+									"    pm.expect(responseData.paymentsTableRowsDTO.length).equals(4);",
+									"});",
+									"",
+									"pm.test('Verify the results', function() {",
+									"    pm.expect(responseData).to.have.property('invoice');",
+									"",
+									"    pm.expect(responseData).to.have.property('discount');",
+									"    pm.expect(responseData.discount).equals(0.0);",
+									"",
+									"    pm.expect(responseData).to.have.property('finalPrice');",
+									"    pm.expect(responseData.finalPrice).equals(0.6);",
+									"",
+									"    pm.expect(responseData).to.have.property('nif');",
+									"    pm.expect(responseData.nif).equals(123456789);",
+									"});",
+									"",
+									"pm.test('Verify the first array element values', function() {",
+									"    var firstPaymentTableRow = responseData.paymentsTableRowsDTO[0];",
+									"",
+									"    pm.expect(firstPaymentTableRow).to.have.property('paymentTableRowID');",
+									"",
+									"    pm.expect(firstPaymentTableRow).to.have.property('periodStart');",
+									"    pm.expect(firstPaymentTableRow.periodStart).equals('8:30');",
+									"",
+									"    pm.expect(firstPaymentTableRow).to.have.property('periodEnd');",
+									"    pm.expect(firstPaymentTableRow.periodEnd).equals('9:30');",
+									"",
+									"    pm.expect(firstPaymentTableRow).to.have.property('fractionStart');",
+									"    pm.expect(firstPaymentTableRow.fractionStart).equals('8:30');",
+									"",
+									"    pm.expect(firstPaymentTableRow).to.have.property('fractionEnd');",
+									"    pm.expect(firstPaymentTableRow.fractionEnd).equals('8:45');",
+									"",
+									"    pm.expect(firstPaymentTableRow).to.have.property('vehicleType');",
+									"    pm.expect(firstPaymentTableRow.vehicleType).equals('AUTOMOBILE');",
+									"",
+									"    pm.expect(firstPaymentTableRow).to.have.property('price');",
+									"    pm.expect(firstPaymentTableRow.price).equals(0.15);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{bearer_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"enterPark\": \"2023-11-26T08:30:00.000Z\",\r\n  \"leftPark\": \"2023-11-26T09:30:00.000Z\",\r\n  \"parkID\": 1,\r\n  \"licensePlateNumber\": \"AB-12-AA\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/payments",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"payments"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "gets catalog, i.e. all payments",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{bearer_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/payments",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"payments"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "finds payments by nif",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{bearer_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/payments/designation/501776508",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"payments",
+								"designation",
+								"501776508"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Login Leo Kim",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.environment.set(\"bearer_token\", pm.response.json().token);\r",
+							"\r",
+							"// Get the token from the environment variable\r",
+							"var jwtToken = pm.environment.get(\"bearer_token\");\r",
+							"\r",
+							"// Split the token into its parts (header, payload, signature)\r",
+							"var parts = jwtToken.split('.');\r",
+							"\r",
+							"// Decode the base64-encoded payload\r",
+							"var decodedPayload = atob(parts[1]);\r",
+							"\r",
+							"// Parse the JSON payload\r",
+							"var payloadJson = JSON.parse(decodedPayload);\r",
+							"\r",
+							"// Extract information from the payload\r",
+							"var userId = payloadJson.sub;\r",
+							"var role = payloadJson.role;\r",
+							"var expirationTime = payloadJson.exp;\r",
+							"\r",
+							"// Set variables in Postman\r",
+							"pm.environment.set(\"user_id\", userId);\r",
+							"pm.environment.set(\"user_role\", role);\r",
+							"pm.environment.set(\"token_expiration\", expirationTime);\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\":\"leoKim@isep.ipp.pt\",\r\n    \"password\":\"123PasswordX#\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/users/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"users",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login Maya",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.environment.set(\"bearer_token\", pm.response.json().token);\r",
+							"\r",
+							"// Get the token from the environment variable\r",
+							"var jwtToken = pm.environment.get(\"bearer_token\");\r",
+							"\r",
+							"// Split the token into its parts (header, payload, signature)\r",
+							"var parts = jwtToken.split('.');\r",
+							"\r",
+							"// Decode the base64-encoded payload\r",
+							"var decodedPayload = atob(parts[1]);\r",
+							"\r",
+							"// Parse the JSON payload\r",
+							"var payloadJson = JSON.parse(decodedPayload);\r",
+							"\r",
+							"// Extract information from the payload\r",
+							"var userId = payloadJson.sub;\r",
+							"var role = payloadJson.role;\r",
+							"var expirationTime = payloadJson.exp;\r",
+							"\r",
+							"// Set variables in Postman\r",
+							"pm.environment.set(\"user_id\", userId);\r",
+							"pm.environment.set(\"user_role\", role);\r",
+							"pm.environment.set(\"token_expiration\", expirationTime);\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\":\"mayaGupta@isep.ipp.pt\",\r\n    \"password\":\"123PasswordX#\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/users/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"users",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login Rui Soares",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.environment.set(\"bearer_token\", pm.response.json().token);\r",
+							"\r",
+							"// Get the token from the environment variable\r",
+							"var jwtToken = pm.environment.get(\"bearer_token\");\r",
+							"\r",
+							"// Split the token into its parts (header, payload, signature)\r",
+							"var parts = jwtToken.split('.');\r",
+							"\r",
+							"// Decode the base64-encoded payload\r",
+							"var decodedPayload = atob(parts[1]);\r",
+							"\r",
+							"// Parse the JSON payload\r",
+							"var payloadJson = JSON.parse(decodedPayload);\r",
+							"\r",
+							"// Extract information from the payload\r",
+							"var userId = payloadJson.sub;\r",
+							"var role = payloadJson.role;\r",
+							"var expirationTime = payloadJson.exp;\r",
+							"\r",
+							"// Set variables in Postman\r",
+							"pm.environment.set(\"user_id\", userId);\r",
+							"pm.environment.set(\"user_role\", role);\r",
+							"pm.environment.set(\"token_expiration\", expirationTime);\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\":\"leoKim@isep.ipp.pt\",\r\n    \"password\":\"123PasswordX#\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/users/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"users",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login supervisor",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.environment.set(\"bearer_token\", pm.response.json().token);\r",
+							"\r",
+							"// Get the token from the environment variable\r",
+							"var jwtToken = pm.environment.get(\"bearer_token\");\r",
+							"\r",
+							"// Split the token into its parts (header, payload, signature)\r",
+							"var parts = jwtToken.split('.');\r",
+							"\r",
+							"// Decode the base64-encoded payload\r",
+							"var decodedPayload = atob(parts[1]);\r",
+							"\r",
+							"// Parse the JSON payload\r",
+							"var payloadJson = JSON.parse(decodedPayload);\r",
+							"\r",
+							"// Extract information from the payload\r",
+							"var userId = payloadJson.sub;\r",
+							"var role = payloadJson.role;\r",
+							"var expirationTime = payloadJson.exp;\r",
+							"\r",
+							"// Set variables in Postman\r",
+							"pm.environment.set(\"user_id\", userId);\r",
+							"pm.environment.set(\"user_role\", role);\r",
+							"pm.environment.set(\"token_expiration\", expirationTime);\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\":\"supervisor@isep.ipp.pt\",\r\n    \"password\":\"123PasswordX#\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/users/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"users",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login park manager",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.environment.set(\"bearer_token\", pm.response.json().token);\r",
+							"\r",
+							"// Get the token from the environment variable\r",
+							"var jwtToken = pm.environment.get(\"bearer_token\");\r",
+							"\r",
+							"// Split the token into its parts (header, payload, signature)\r",
+							"var parts = jwtToken.split('.');\r",
+							"\r",
+							"// Decode the base64-encoded payload\r",
+							"var decodedPayload = atob(parts[1]);\r",
+							"\r",
+							"// Parse the JSON payload\r",
+							"var payloadJson = JSON.parse(decodedPayload);\r",
+							"\r",
+							"// Extract information from the payload\r",
+							"var userId = payloadJson.sub;\r",
+							"var role = payloadJson.role;\r",
+							"var expirationTime = payloadJson.exp;\r",
+							"\r",
+							"// Set variables in Postman\r",
+							"pm.environment.set(\"user_id\", userId);\r",
+							"pm.environment.set(\"user_role\", role);\r",
+							"pm.environment.set(\"token_expiration\", expirationTime);\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\":\"parkmanager@isep.ipp.pt\",\r\n    \"password\":\"123PasswordX#\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/users/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"users",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login customer manager",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.environment.set(\"bearer_token\", pm.response.json().token);\r",
+							"\r",
+							"// Get the token from the environment variable\r",
+							"var jwtToken = pm.environment.get(\"bearer_token\");\r",
+							"\r",
+							"// Split the token into its parts (header, payload, signature)\r",
+							"var parts = jwtToken.split('.');\r",
+							"\r",
+							"// Decode the base64-encoded payload\r",
+							"var decodedPayload = atob(parts[1]);\r",
+							"\r",
+							"// Parse the JSON payload\r",
+							"var payloadJson = JSON.parse(decodedPayload);\r",
+							"\r",
+							"// Extract information from the payload\r",
+							"var userId = payloadJson.sub;\r",
+							"var role = payloadJson.role;\r",
+							"var expirationTime = payloadJson.exp;\r",
+							"\r",
+							"// Set variables in Postman\r",
+							"pm.environment.set(\"user_id\", userId);\r",
+							"pm.environment.set(\"user_role\", role);\r",
+							"pm.environment.set(\"token_expiration\", expirationTime);\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\":\"customermanager@isep.ipp.pt\",\r\n    \"password\":\"123PasswordX#\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/users/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"users",
+						"login"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "bearer_token",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "user_id",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "user_role",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "token_expiration",
+			"value": "",
+			"type": "string"
+		}
+	]
+}
