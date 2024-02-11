@@ -1,0 +1,18 @@
+[package]
+org = "ricco"
+name = "bal_api_gateway"
+version = "0.1.0"
+distribution = "2201.8.0"
+
+[build-options]
+observabilityIncluded = true
+
+[[dependency]]
+org = "ballerina"
+name = "http"
+version = "2.10.6" # Use the appropriate version
+
+[[dependency]]
+org = "ballerina"
+name = "jwt"
+version = "2.10.0" # Use the appropriate version
