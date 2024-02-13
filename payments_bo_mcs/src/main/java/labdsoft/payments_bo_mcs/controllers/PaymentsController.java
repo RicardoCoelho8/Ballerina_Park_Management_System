@@ -25,13 +25,13 @@ class PaymentsController {
     private PaymentsService service;
 
     @Operation(summary = "create payment from information from of the barrier")
-    @PostMapping
+    @PostMapping("/createPayment")
     public ResponseEntity<PaymentsDTO> createPayment(@RequestBody final BarrierInfoDTO barrierInfoDTO) throws Exception {
         return ResponseEntity.ok().body(service.createFromBarrier(barrierInfoDTO));
     }
 
     @Operation(summary = "gets catalog, i.e. all payments")
-    @GetMapping
+    @GetMapping("/getAllPayments")
     public ResponseEntity<Iterable<PaymentsDTO>> getCatalog() {
         return ResponseEntity.ok().body(service.getCatalog());
     }

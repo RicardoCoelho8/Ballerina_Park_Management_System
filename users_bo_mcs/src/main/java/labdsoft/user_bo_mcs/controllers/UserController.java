@@ -31,7 +31,7 @@ class UserController {
     private UserService service;
 
     @Operation(summary = "creates a customer")
-    @PostMapping
+    @PostMapping("/createUser")
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<UserDTO> create(@RequestBody UserOnCreation userBody) {
         logger.info("Received create customer request " + userBody);
@@ -67,7 +67,7 @@ class UserController {
     }
 
     @Operation(summary = "gets all users")
-    @GetMapping
+    @GetMapping("/getAllUsers")
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<List<UserDTO>> getAll(
             @RequestHeader("X-UserRole") String userRole) {
@@ -90,7 +90,7 @@ class UserController {
     }
 
     @Operation(summary = "Add Vehicle for user")
-    @PutMapping("/{userId}/vehicle")
+    @PutMapping("/vehicle/{userId}")
     @ResponseStatus(HttpStatus.ACCEPTED)
     public ResponseEntity<VehicleOnCreation> addUserVehicle(@RequestHeader("X-UserId") String headerUserId,
             @RequestHeader("X-UserRole") String userRole,
@@ -120,7 +120,7 @@ class UserController {
     }
 
     @Operation(summary = "Changes user Payment Method")
-    @PutMapping("/{userId}/payment-method")
+    @PutMapping("/payment-method/{userId}/")
     @ResponseStatus(HttpStatus.ACCEPTED)
     public ResponseEntity<PaymentDTO> changePaymentMethod(@RequestHeader("X-UserId") String headerUserId,
             @RequestHeader("X-UserRole") String userRole,
@@ -150,7 +150,7 @@ class UserController {
     }
 
     @Operation(summary = "gets all user vehicles")
-    @GetMapping("/{userId}/vehicles")
+    @GetMapping("/vehicles/{userId}")
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<Set<VehicleOnCreation>> getAllUserVehicles(@RequestHeader("X-UserId") String headerUserId,
             @RequestHeader("X-UserRole") String userRole,
@@ -179,7 +179,7 @@ class UserController {
     }
 
     @Operation(summary = "get user paymentMethod")
-    @GetMapping("/{userId}/paymentMethod")
+    @GetMapping("/paymentMethod/{userId}")
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<PaymentDTO> getUserPaymentMethod(@RequestHeader("X-UserId") String headerUserId,
             @RequestHeader("X-UserRole") String userRole,

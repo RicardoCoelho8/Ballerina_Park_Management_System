@@ -75,6 +75,8 @@ function sendForbiddenResponse(http:Caller caller) returns http:ListenerError? {
 
 service / on apiListener {
 
+    // User routes ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    
     resource function post users/[string... path](http:Caller caller, http:Request req) returns error? {
         string fullPath = "/users/" + string:'join("/", ...path);
         if !validateJWT(req, fullPath) {
@@ -82,19 +84,20 @@ service / on apiListener {
         }
 
         // Forward request to user microservice
+        http:Client userServiceClient = check new("http://localhost:8090");
+        anydata response = check userServiceClient->post(fullPath, req);
+        return caller->respond(response);
     }
 
-    resource function post parks/[string... path](http:Caller caller, http:Request req) returns error? {
-        string fullPath = "/parks/" + string:'join("/", ...path);
-        log:printInfo("FullPath: " + fullPath);
-        log:printInfo("Path: " + fullPath);
+    resource function put users/[string... path](http:Caller caller, http:Request req) returns error? {
+        string fullPath = "/users/" + string:'join("/", ...path);
         if !validateJWT(req, fullPath) {
             return sendForbiddenResponse(caller);
         }
 
-        // Forward request to park microservice
-        http:Client parkServiceClient = check new("http://localhost:8094");
-        anydata response = check parkServiceClient->get(fullPath);
+        // Forward request to user microservice
+        http:Client userServiceClient = check new("http://localhost:8090");
+        anydata response = check userServiceClient->put(fullPath, req);
         return caller->respond(response);
     }
 
@@ -105,6 +108,35 @@ service / on apiListener {
         }
 
         // Forward request to user microservice
+        http:Client userServiceClient = check new("http://localhost:8090");
+        anydata response = check userServiceClient->get(fullPath);
+        return caller->respond(response);
+    }
+
+    resource function get userReport/[string... path](http:Caller caller, http:Request req) returns error? {
+        string fullPath = "/userReport/" + string:'join("/", ...path);
+        if !validateJWT(req, fullPath) {
+            return sendForbiddenResponse(caller);
+        }
+
+        // Forward request to user microservice
+        http:Client userServiceClient = check new("http://localhost:8090");
+        anydata response = check userServiceClient->get(fullPath);
+        return caller->respond(response);
+    }
+
+    // Park routes ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+    resource function put parks/[string... path](http:Caller caller, http:Request req) returns error? {
+        string fullPath = "/parks/" + string:'join("/", ...path);
+        if !validateJWT(req, fullPath) {
+            return sendForbiddenResponse(caller);
+        }
+
+        // Forward request to park microservice
+        http:Client parkServiceClient = check new("http://localhost:8094");
+        anydata response = check parkServiceClient->put(fullPath, req);
+        return caller->respond(response);
     }
 
     resource function get parks/[string... path](http:Caller caller, http:Request req) returns error? {
@@ -114,8 +146,72 @@ service / on apiListener {
         }
 
         // Forward request to park microservice
+        http:Client parkServiceClient = check new("http://localhost:8094");
+        anydata response = check parkServiceClient->get(fullPath);
+        return caller->respond(response);
     }
 
+    resource function get parkReport/[string... path](http:Caller caller, http:Request req) returns error? {
+        string fullPath = "/parkReport/" + string:'join("/", ...path);
+        if !validateJWT(req, fullPath) {
+            return sendForbiddenResponse(caller);
+        }
 
-    // Define other routes similarly, including JWT validation
+        // Forward request to park microservice
+        http:Client parkServiceClient = check new("http://localhost:8094");
+        anydata response = check parkServiceClient->get(fullPath);
+        return caller->respond(response);
+    }
+
+    // Barrier and Display routes ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+    resource function post barriers/[string... path](http:Caller caller, http:Request req) returns error? {
+        string fullPath = "/barriers/" + string:'join("/", ...path);
+        if !validateJWT(req, fullPath) {
+            return sendForbiddenResponse(caller);
+        }
+
+        // Forward request to park microservice
+        http:Client parkServiceClient = check new("http://localhost:8094");
+        anydata response = check parkServiceClient->post(fullPath, req);
+        return caller->respond(response);
+    }
+
+    resource function post display/[string... path](http:Caller caller, http:Request req) returns error? {
+        string fullPath = "/display/" + string:'join("/", ...path);
+        if !validateJWT(req, fullPath) {
+            return sendForbiddenResponse(caller);
+        }
+
+        // Forward request to park microservice
+        http:Client parkServiceClient = check new("http://localhost:8094");
+        anydata response = check parkServiceClient->post(fullPath, req);
+        return caller->respond(response);
+    }
+
+    // Payment routes ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+    resource function post payments/[string... path](http:Caller caller, http:Request req) returns error? {
+        string fullPath = "/payments/" + string:'join("/", ...path);
+        if !validateJWT(req, fullPath) {
+            return sendForbiddenResponse(caller);
+        }
+
+        // Forward request to payments microservice
+        http:Client paymentsServiceClient = check new("http://localhost:8086");
+        anydata response = check paymentsServiceClient->post(fullPath, req);
+        return caller->respond(response);
+    }
+
+    resource function get payments/[string... path](http:Caller caller, http:Request req) returns error? {
+        string fullPath = "/payments/" + string:'join("/", ...path);
+        if !validateJWT(req, fullPath) {
+            return sendForbiddenResponse(caller);
+        }
+
+        // Forward request to payments microservice
+        http:Client paymentsServiceClient = check new("http://localhost:8086");
+        anydata response = check paymentsServiceClient->get(fullPath);
+        return caller->respond(response);
+    }
 }
