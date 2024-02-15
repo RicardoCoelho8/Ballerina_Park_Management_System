@@ -27,21 +27,22 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/users",
+							"raw": "http://localhost:9090/users/createUser",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "8080",
+							"port": "9090",
 							"path": [
-								"users"
+								"users",
+								"createUser"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "Ger all users",
+					"name": "Get all users",
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -62,14 +63,15 @@
 							}
 						],
 						"url": {
-							"raw": "http://localhost:8080/users",
+							"raw": "http://localhost:9090/users/getAllUsers",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "8080",
+							"port": "9090",
 							"path": [
-								"users"
+								"users",
+								"getAllUsers"
 							]
 						}
 					},
@@ -111,16 +113,16 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/users/{{user_id}}/vehicle",
+							"raw": "http://localhost:9090/users/vehicle/{{user_id}}",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "8080",
+							"port": "9090",
 							"path": [
 								"users",
-								"{{user_id}}",
-								"vehicle"
+								"vehicle",
+								"{{user_id}}"
 							]
 						}
 					},
@@ -162,16 +164,16 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/users/{{user_id}}/payment-method",
+							"raw": "http://localhost:9090/users/paymentMethod/{{user_id}}",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "8080",
+							"port": "9090",
 							"path": [
 								"users",
-								"{{user_id}}",
-								"payment-method"
+								"paymentMethod",
+								"{{user_id}}"
 							]
 						}
 					},
@@ -216,16 +218,16 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/users/{{user_id}}/vehicles",
+							"raw": "http://localhost:9090/users/vehicles/{{user_id}}",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "8080",
+							"port": "9090",
 							"path": [
 								"users",
-								"{{user_id}}",
-								"vehicles"
+								"vehicles",
+								"{{user_id}}"
 							]
 						}
 					},
@@ -245,10 +247,21 @@
 							]
 						},
 						"method": "POST",
-						"header": [],
+						"header": [
+							{
+								"key": "X-UserRole",
+								"value": "{{user_role}}",
+								"type": "text"
+							},
+							{
+								"key": "X-UserId",
+								"value": "{{user_id}}",
+								"type": "text"
+							}
+						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"userIds\" : [1,2,3],\r\n    \"amount\" : 50,\r\n    \"reason\" : \"For outstanding contributions to the park\"\r\n}",
+							"raw": "{\r\n    \"userIds\" : [4],\r\n    \"amount\" : 80,\r\n    \"reason\" : \"For outstanding contributions to the park\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -256,12 +269,12 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/users/parkies",
+							"raw": "http://localhost:9090/users/parkies",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "8080",
+							"port": "9090",
 							"path": [
 								"users",
 								"parkies"
@@ -298,12 +311,12 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/users/parkies/{{user_id}}",
+							"raw": "http://localhost:9090/users/parkies/{{user_id}}",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "8080",
+							"port": "9090",
 							"path": [
 								"users",
 								"parkies",
@@ -364,12 +377,12 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/parks/getAllOccupancies",
+							"raw": "http://localhost:9090/parks/getAllOccupancies",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "8080",
+							"port": "9090",
 							"path": [
 								"parks",
 								"getAllOccupancies"
@@ -394,12 +407,12 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/parks/getAllPriceTableEntries/1",
+							"raw": "http://localhost:9090/parks/getAllPriceTableEntries/1",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "8080",
+							"port": "9090",
 							"path": [
 								"parks",
 								"getAllPriceTableEntries",
@@ -425,12 +438,12 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/parks/real-time/occupancy/41.178496516445534/-8.607637458224238/1500",
+							"raw": "http://localhost:9090/parks/real-time/occupancy/41.178496516445534/-8.607637458224238/1500",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "8080",
+							"port": "9090",
 							"path": [
 								"parks",
 								"real-time",
@@ -459,12 +472,12 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/parks/parkingHistory/{{user_id}}",
+							"raw": "http://localhost:9090/parks/parkingHistory/{{user_id}}",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "8080",
+							"port": "9090",
 							"path": [
 								"parks",
 								"parkingHistory",
@@ -490,12 +503,12 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/parks/getSpotsByParkNumber/2",
+							"raw": "http://localhost:9090/parks/getSpotsByParkNumber/2",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "8080",
+							"port": "9090",
 							"path": [
 								"parks",
 								"getSpotsByParkNumber",
@@ -521,12 +534,12 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/parks/getParkyThresholds/1",
+							"raw": "http://localhost:9090/parks/getParkyThresholds/1",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "8080",
+							"port": "9090",
 							"path": [
 								"parks",
 								"getParkyThresholds",
@@ -552,12 +565,12 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/parks/getOvernightConfig/1",
+							"raw": "http://localhost:9090/parks/getOvernightConfig/1",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "8080",
+							"port": "9090",
 							"path": [
 								"parks",
 								"getOvernightConfig",
@@ -583,15 +596,46 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/parks/getAllParks",
+							"raw": "http://localhost:9090/parks/getAllParks",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "8080",
+							"port": "9090",
 							"path": [
 								"parks",
 								"getAllParks"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all parks Copy",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{bearer_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9090/parkReport/percentageOf/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9090",
+							"path": [
+								"parkReport",
+								"percentageOf",
+								"1"
 							]
 						}
 					},
@@ -613,12 +657,12 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/parks/getQuantityOfHistoryByCustomerID/3",
+							"raw": "http://localhost:9090/parks/getQuantityOfHistoryByCustomerID/3",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "8080",
+							"port": "9090",
 							"path": [
 								"parks",
 								"getQuantityOfHistoryByCustomerID",
@@ -644,16 +688,16 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/parks/getUserParkyFlag/5",
+							"raw": "http://localhost:9090/parks/getUserParkyFlag/4",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "8080",
+							"port": "9090",
 							"path": [
 								"parks",
 								"getUserParkyFlag",
-								"5"
+								"4"
 							]
 						}
 					},
@@ -676,7 +720,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"parkNumber\":\"1\",\r\n    \"spotNumber\":\"A3\",\r\n    \"operational\":true,\r\n    \"managerName\":\"Toni\"\r\n}",
+							"raw": "{\r\n    \"parkNumber\":\"1\",\r\n    \"spotNumber\":\"A3\",\r\n    \"operational\":false,\r\n    \"managerName\":\"Toni\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -684,12 +728,12 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/parks/enableDisableSpot",
+							"raw": "http://localhost:9090/parks/enableDisableSpot",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "8080",
+							"port": "9090",
 							"path": [
 								"parks",
 								"enableDisableSpot"
@@ -723,12 +767,12 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/parks/enableDisableOvernightFee",
+							"raw": "http://localhost:9090/parks/enableDisableOvernightFee",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "8080",
+							"port": "9090",
 							"path": [
 								"parks",
 								"enableDisableOvernightFee"
@@ -762,12 +806,12 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/parks/changeParkyThresholds/1",
+							"raw": "http://localhost:9090/parks/changeParkyThresholds/1",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "8080",
+							"port": "9090",
 							"path": [
 								"parks",
 								"changeParkyThresholds",
@@ -802,12 +846,12 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/parks/changeOvernightFeePrice",
+							"raw": "http://localhost:9090/parks/changeOvernightFeePrice",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "8080",
+							"port": "9090",
 							"path": [
 								"parks",
 								"changeOvernightFeePrice"
@@ -875,12 +919,12 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/parks/defineTimePeriods/2",
+							"raw": "http://localhost:9090/parks/defineTimePeriods/2",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "8080",
+							"port": "9090",
 							"path": [
 								"parks",
 								"defineTimePeriods",
@@ -918,7 +962,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"customerID\": \"5\",\r\n  \"parkyFlag\": true\r\n}\r\n",
+							"raw": "{\r\n  \"customerID\": \"4\",\r\n  \"parkyFlag\": true\r\n}\r\n",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -990,12 +1034,12 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/barriers/exit",
+							"raw": "http://localhost:9090/barriers/exit",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "8080",
+							"port": "9090",
 							"path": [
 								"barriers",
 								"exit"
@@ -1054,12 +1098,12 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/display/get",
+							"raw": "http://localhost:9090/display/get",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "8080",
+							"port": "9090",
 							"path": [
 								"display",
 								"get"
@@ -1151,14 +1195,15 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/payments",
+							"raw": "http://localhost:8080/payments/createPayment",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
-								"payments"
+								"payments",
+								"createPayment"
 							]
 						}
 					},
@@ -1192,14 +1237,15 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/payments",
+							"raw": "http://localhost:9090/payments/getAllPayments",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "8080",
+							"port": "9090",
 							"path": [
-								"payments"
+								"payments",
+								"getAllPayments"
 							]
 						}
 					},
@@ -1233,12 +1279,12 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/payments/designation/501776508",
+							"raw": "http://localhost:9090/payments/designation/501776508",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "8080",
+							"port": "9090",
 							"path": [
 								"payments",
 								"designation",
@@ -1302,12 +1348,12 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/users/login",
+					"raw": "http://localhost:9090/users/login",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "8080",
+					"port": "9090",
 					"path": [
 						"users",
 						"login"
@@ -1368,12 +1414,12 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/users/login",
+					"raw": "http://localhost:9090/users/login",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "8080",
+					"port": "9090",
 					"path": [
 						"users",
 						"login"
@@ -1426,7 +1472,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"email\":\"leoKim@isep.ipp.pt\",\r\n    \"password\":\"123PasswordX#\"\r\n}",
+					"raw": "{\r\n    \"email\":\"ruiSoares@isep.ipp.pt\",\r\n    \"password\":\"123PasswordX#\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -1434,12 +1480,12 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/users/login",
+					"raw": "http://localhost:9090/users/login",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "8080",
+					"port": "9090",
 					"path": [
 						"users",
 						"login"
@@ -1500,12 +1546,12 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/users/login",
+					"raw": "http://localhost:9090/users/login",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "8080",
+					"port": "9090",
 					"path": [
 						"users",
 						"login"
@@ -1566,12 +1612,12 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/users/login",
+					"raw": "http://localhost:9090/users/login",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "8080",
+					"port": "9090",
 					"path": [
 						"users",
 						"login"
@@ -1632,12 +1678,12 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/users/login",
+					"raw": "http://localhost:9090/users/login",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "8080",
+					"port": "9090",
 					"path": [
 						"users",
 						"login"

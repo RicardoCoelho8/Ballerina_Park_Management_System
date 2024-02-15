@@ -120,7 +120,7 @@ class UserController {
     }
 
     @Operation(summary = "Changes user Payment Method")
-    @PutMapping("/payment-method/{userId}/")
+    @PutMapping("/paymentMethod/{userId}")
     @ResponseStatus(HttpStatus.ACCEPTED)
     public ResponseEntity<PaymentDTO> changePaymentMethod(@RequestHeader("X-UserId") String headerUserId,
             @RequestHeader("X-UserRole") String userRole,

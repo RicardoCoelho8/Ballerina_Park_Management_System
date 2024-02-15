@@ -3,19 +3,22 @@ import ballerina/jwt;
 import ballerina/log;
 
 string secretKey = "jhewiwrvmqere3"; // The key used for HMAC256 algorithm
+string userId = "";
+string role = "";
 
 listener http:Listener apiListener = new(9090, {
-    httpVersion: "2.0" // Enabling HTTP/2.0
+    httpVersion: "2.0"
 });
 
 map<http:Method> unauthenticatedRoutes = {
-    "/users": http:HTTP_POST,
+    "/users/createUser": http:HTTP_POST,
     "/users/login": http:HTTP_POST,
     "/barriers/entrance": http:HTTP_POST,
     "/barriers/exit": http:HTTP_POST,
     "/display/update": http:HTTP_POST,
     "/display/get": http:HTTP_POST,
-    "/payments": http:HTTP_POST
+    "/payments/createPayment": http:HTTP_POST,
+    "/payments/getAllPayments": http:HTTP_GET
 };
 
 function isUnauthenticatedRoute(string path, string method) returns boolean {
@@ -53,6 +56,11 @@ function validateJWT(http:Request req, string path) returns boolean {
 
             if validationResult is jwt:Payload {
                 log:printInfo("JWT validation succeeded");
+
+                // Extract userId and role from JWT payload and setting them as headers
+                userId = validationResult["sub"].toString();
+                role = validationResult["role"].toString();
+
                 return true; // Validation successful
             } else {
                 log:printError("JWT validation failed", 'error = validationResult);
@@ -107,21 +115,33 @@ service / on apiListener {
             return sendForbiddenResponse(caller);
         }
 
+        // Headers to be forwarded to user microservice
+        map<string|string[]> headers = {
+            "X-UserId": [userId],
+            "X-UserRole": [role]
+        };
+
         // Forward request to user microservice
-        http:Client userServiceClient = check new("http://localhost:8090");
-        anydata response = check userServiceClient->get(fullPath);
+        http:Client userServiceClient = check new("http://localhost:9990");
+        anydata response = check userServiceClient->get(fullPath, headers);
         return caller->respond(response);
     }
 
-    resource function get userReport/[string... path](http:Caller caller, http:Request req) returns error? {
+        resource function get userReport/[string... path](http:Caller caller, http:Request req) returns error? {
         string fullPath = "/userReport/" + string:'join("/", ...path);
         if !validateJWT(req, fullPath) {
             return sendForbiddenResponse(caller);
         }
 
+        // Headers to be forwarded to user microservice
+        map<string|string[]> headers = {
+            "X-UserId": [userId],
+            "X-UserRole": [role]
+        };
+
         // Forward request to user microservice
         http:Client userServiceClient = check new("http://localhost:8090");
-        anydata response = check userServiceClient->get(fullPath);
+        anydata response = check userServiceClient->get(fullPath, headers);
         return caller->respond(response);
     }
 
@@ -157,9 +177,15 @@ service / on apiListener {
             return sendForbiddenResponse(caller);
         }
 
+        // Headers to be forwarded to park microservice
+        map<string|string[]> headers = {
+            "X-UserId": [userId],
+            "X-UserRole": [role]
+        };
+
         // Forward request to park microservice
         http:Client parkServiceClient = check new("http://localhost:8094");
-        anydata response = check parkServiceClient->get(fullPath);
+        anydata response = check parkServiceClient->get(fullPath, headers);
         return caller->respond(response);
     }
 
@@ -209,9 +235,16 @@ service / on apiListener {
             return sendForbiddenResponse(caller);
         }
 
+        // Headers to be forwarded to payments microservice
+        map<string|string[]> headers = {
+            "X-UserId": [userId],
+            "X-UserRole": [role]
+        };
+
         // Forward request to payments microservice
         http:Client paymentsServiceClient = check new("http://localhost:8086");
-        anydata response = check paymentsServiceClient->get(fullPath);
+        anydata response = check paymentsServiceClient->get(fullPath, headers);
         return caller->respond(response);
     }
+
 }

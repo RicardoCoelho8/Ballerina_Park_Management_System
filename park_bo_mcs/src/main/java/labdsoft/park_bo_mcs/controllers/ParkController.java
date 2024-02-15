@@ -48,7 +48,7 @@ class ParkController {
 
     @Operation(summary = "Enable or disable parking spot by spotNumber")
     @PutMapping("/enableDisableSpot")
-    public ResponseEntity<String> enableDisableSpot(@RequestBody SpotHistoryDTO spotHistoryDTO) {
+    public ResponseEntity<ResponseString> enableDisableSpot(@RequestBody SpotHistoryDTO spotHistoryDTO) {
         return new ResponseEntity<>(service.enableDisableSpot(spotHistoryDTO), HttpStatus.OK);
     }
 
@@ -66,7 +66,7 @@ class ParkController {
 
     @Operation(summary = "Change Parky thresholds by park number")
     @PutMapping("/changeParkyThresholds/{parkNumber}")
-    public ResponseEntity<String> changeParkyThresholds(@PathVariable String parkNumber, @RequestBody ParkyConfigDTO parkyConfigDTO) {
+    public ResponseEntity<ResponseString> changeParkyThresholds(@PathVariable String parkNumber, @RequestBody ParkyConfigDTO parkyConfigDTO) {
         return new ResponseEntity<>(service.changeParkyThresholds(parkNumber, parkyConfigDTO), HttpStatus.OK);
     }
 
@@ -84,13 +84,13 @@ class ParkController {
 
     @Operation(summary = "Enable or disable overnight fee by park number")
     @PutMapping("/enableDisableOvernightFee")
-    public ResponseEntity<String> enableDisableOvernightFeeByParkNumber(@RequestBody OvernightEnableDTO dto) {
+    public ResponseEntity<ResponseString> enableDisableOvernightFeeByParkNumber(@RequestBody OvernightEnableDTO dto) {
         return new ResponseEntity<>(service.enableDisableOvernightFeeByParkNumber(dto), HttpStatus.OK);
     }
 
     @Operation(summary = "Change overnight fee price by park number")
     @PutMapping("/changeOvernightFeePrice")
-    public ResponseEntity<String> changeOvernightFeePriceByParkNumber(@RequestBody OvernightPriceDTO dto) {
+    public ResponseEntity<ResponseString> changeOvernightFeePriceByParkNumber(@RequestBody OvernightPriceDTO dto) {
         return new ResponseEntity<>(service.changeOvernightFeePriceByParkNumber(dto), HttpStatus.OK);
     }
 
@@ -102,7 +102,7 @@ class ParkController {
 
     @Operation(summary = "Change user parky flag by customer id")
     @PutMapping("/changeUserParkyFlag")
-    public ResponseEntity<String> changeUserParkyFlag(@RequestBody ParkyFlagDTO dto) {
+    public ResponseEntity<ResponseString> changeUserParkyFlag(@RequestBody ParkyFlagDTO dto) {
         return new ResponseEntity<>(service.changeUserParkyFlag(dto), HttpStatus.OK);
     }
 

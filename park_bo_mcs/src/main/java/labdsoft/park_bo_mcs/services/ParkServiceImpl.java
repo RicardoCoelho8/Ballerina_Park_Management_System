@@ -138,7 +138,7 @@ public class ParkServiceImpl implements ParkService {
     }
 
     @Override
-    public String enableDisableSpot(SpotHistoryDTO spotHistoryDTO) {
+    public ResponseString enableDisableSpot(SpotHistoryDTO spotHistoryDTO) {
         Park park = parkRepository.findByParkNumber(spotHistoryDTO.getParkNumber());
 
         Spot spot = spotRepository.getSpotBySpotNumberAndParkID(spotHistoryDTO.getSpotNumber(), park.getParkID());
@@ -153,11 +153,11 @@ public class ParkServiceImpl implements ParkService {
                 .HistoryOperational(message)
                 .build());
 
-        return message;
+        return ResponseString.builder().response(message).build();
     }
 
     @Override
-    public String changeParkyThresholds(String parkNumber, ParkyConfigDTO parkyConfigDTO) {
+    public ResponseString changeParkyThresholds(String parkNumber, ParkyConfigDTO parkyConfigDTO) {
         Park park = parkRepository.findByParkNumber(Long.parseLong(parkNumber));
         park.setParkyConfig(ParkyConfig.builder()
                 .parkiesPerHour(parkyConfigDTO.getParkiesPerHour())
@@ -165,25 +165,25 @@ public class ParkServiceImpl implements ParkService {
                 .build());
         parkRepository.save(park);
 
-        return "Park " + parkNumber + " thresholds changed";
+        return ResponseString.builder().response("Park " + parkNumber + " thresholds changed").build();
     }
 
     @Override
-    public String enableDisableOvernightFeeByParkNumber(OvernightEnableDTO dto) {
+    public ResponseString enableDisableOvernightFeeByParkNumber(OvernightEnableDTO dto) {
         Park park = parkRepository.findByParkNumber(Long.parseLong(dto.getParkNumber()));
         park.getOvernightConfig().setEnabled(dto.isStatus());
         parkRepository.save(park);
 
-        return "Park " + dto.getParkNumber() + " overnight fee " + dto.isStatus();
+        return ResponseString.builder().response("Park " + dto.getParkNumber() + " overnight fee " + dto.isStatus()).build();
     }
 
     @Override
-    public String changeOvernightFeePriceByParkNumber(OvernightPriceDTO dto) {
+    public ResponseString changeOvernightFeePriceByParkNumber(OvernightPriceDTO dto) {
         Park park = parkRepository.findByParkNumber(Long.parseLong(dto.getParkNumber()));
         park.getOvernightConfig().setOvernightFee(dto.getPrice());
         parkRepository.save(park);
 
-        return "Park " + dto.getParkNumber() + " overnight fee changed to " + dto.getPrice();
+        return ResponseString.builder().response("Park " + dto.getParkNumber() + " overnight fee changed to " + dto.getPrice()).build();
     }
 
     @Override
@@ -220,12 +220,12 @@ public class ParkServiceImpl implements ParkService {
     }
 
     @Override
-    public String changeUserParkyFlag(ParkyFlagDTO parkyFlagDTO) {
+    public ResponseString changeUserParkyFlag(ParkyFlagDTO parkyFlagDTO) {
         Customer customer = customerRepository.findByCustomerID(Long.parseLong(parkyFlagDTO.getCustomerID()));
         customer.setUseParkyCoins(parkyFlagDTO.getParkyFlag());
         customerRepository.save(customer);
 
-        return "Success";
+        return ResponseString.builder().response("Success").build();
     }
 
     @Override

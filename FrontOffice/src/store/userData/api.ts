@@ -42,7 +42,7 @@ export const userDataApi = createApi({
   endpoints: (build) => ({
     postUserData: build.mutation<any, UserDataRegisterInput>({
       query: (newData) => ({
-        url: "/users",
+        url: "/users/createUser",
         method: "POST",
         body: newData,
       }),
@@ -59,7 +59,7 @@ export const userDataApi = createApi({
       { paymentData: UserPaymentMethodInput; userId: string }
     >({
       query: ({ paymentData, userId }) => ({
-        url: `/users/${userId}/payment-method`,
+        url: `/users/paymentMethod/${userId}`,
         method: "PUT",
         body: paymentData,
       }),
@@ -109,7 +109,7 @@ export const userDataApi = createApi({
       { newVehicle: UserDataAddNewVehicleInput; userId: string }
     >({
       query: ({ newVehicle, userId }) => ({
-        url: `/users/${userId}/vehicle`,
+        url: `/users/vehicle/${userId}`,
         method: "PUT",
         body: newVehicle,
       }),
@@ -142,10 +142,10 @@ export const userDataApi = createApi({
       }),
     }),
     getUserVehicles: build.query<UserDataAddNewVehicleInput[], string>({
-      query: (userId) => ({ url: `/users/${userId}/vehicles` }),
+      query: (userId) => ({ url: `/users/vehicles/${userId}` }),
     }),
     getUserPaymentMethod: build.query<any, string>({
-      query: (userId) => ({ url: `/users/${userId}/paymentMethod` }),
+      query: (userId) => ({ url: `/users/paymentMethod/${userId}` }),
     }),
     getSpotsByParkNumber: build.query<SpotOutput[], string>({
       query: (parkNumber) => ({
@@ -185,7 +185,7 @@ export const userDataApi = createApi({
       query: (userId) => ({ url: `/parks/parkingHistory/${userId}` }),
     }),
     getAllUsers: build.query<GetAllUsersOutputItem[], void>({
-      query: () => ({ url: `/users` }),
+      query: () => ({ url: `/users/getAllUsers` }),
     }),
     getUserNumberOfVisits: build.query<number, string>({
       query: (userId) => ({
