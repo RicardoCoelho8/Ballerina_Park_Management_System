@@ -122,7 +122,7 @@ service / on apiListener {
         };
 
         // Forward request to user microservice
-        http:Client userServiceClient = check new("http://localhost:9990");
+        http:Client userServiceClient = check new("http://localhost:8090");
         anydata response = check userServiceClient->get(fullPath, headers);
         return caller->respond(response);
     }

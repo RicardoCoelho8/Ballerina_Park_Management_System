@@ -5,6 +5,9 @@ cd ..
 cd api-gateway
 cmd /C mvn clean install -DskipTests
 cd ..
+cd bal_api_gateway
+cmd /C bal build
+cd ..
 cd park_bo_mcs
 cmd /C mvn clean install -DskipTests
 cd ..

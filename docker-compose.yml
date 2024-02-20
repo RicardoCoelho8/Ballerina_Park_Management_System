@@ -36,6 +36,21 @@ services:
       - "8080:8080"
     networks:
       - park20
+      
+  # ballerina_gateway:
+    # depends_on:
+      # eureka:
+        # condition: service_started
+    # build:
+      # context: ./bal_api_gateway
+      # dockerfile: Dockerfile
+    # environment:
+      # eureka.client.service-url.defaultZone: http://host.docker.internal:8761/eureka
+      # eureka.instance.ip-address: host.docker.internal
+    # ports:
+      # - "9090:9090"
+    # networks:
+      # - park20
 
   #Park BackOffice 1
   park_bo_mcs_1:
