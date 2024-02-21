@@ -22,12 +22,13 @@ Git
 * Docker (for running microservices)
 * Node.js and npm (for the React frontend)
 * Java (for springboot microservices)
+* Ballerina (for ballerina api gateway)
 
 ### Cloning the Repository
 `git clone https://github.com/RicardoCoelho8/Park_Management_System.git`
 
 ### Navigate to the cloned directory:
-`cd ../Park_Management_System`
+`cd ../Ballerina_Park_Management_System`
 
 ### Run the Setup and start script for microservices
 `SetupAndStart.bat` or `SetupAndStart.sh` (linux users)
@@ -37,6 +38,10 @@ Git
 `npm install` (install dependencies)    
 `npm start`  (start the app)   
 
+### Run ballerina api gateway
+`cd bal_api_gateway` (navigate to ballerina api gateway dir)    
+`bal run`  (start the app)     
+
 ### Run the simulation of Barriers and Display screens of one Park
 `cd ..`         
 `cd StartFrontEnd`     
@@ -45,13 +50,11 @@ Git
 `StartDisplayFrontEnd1.bat` or `StartDisplayFrontEnd1.sh` (linux users)     
 `StartDisplayFrontEnd2.bat` or `StartDisplayFrontEnd2.sh` (linux users)     
 
-
 ### Component Descriptions
 - **StartBarrierFrontEnd1:** Represents the entrance barrier of the park. This component controls and manages the access of vehicles as they enter the park.
 - **StartBarrierFrontEnd2:** Functions as the exit barrier of the park. It manages and controls the departure of vehicles.
 - **StartDisplayFrontEnd1:** Serves as a display at the park's entrance. It provides necessary information and instructions to the customers upon their arrival.
 - **StartDisplayFrontEnd2:** Acts as the display at the park's exit. This component presents relevant information to the customers as they depart from the park.
-
 
 ### Using the app
 - **Registered Users:** Log in with your credentials to access the system.
@@ -64,7 +67,6 @@ Git
   5. **User:** ruiSoares@isep.ipp.pt : 123PasswordX#
 
 **Note:** The frontend app interface is optimized for specific devices: the Customer and Park Manager screens are designed for a tablet view, while the User screen is tailored for mobile devices. For the best user experience, we recommend adjusting your browser window size or using the browser's DevTools to simulate a tablet or mobile screen when accessing these different sections of the application.
-
 
 ### Simulate the entrance and exit of a vehicle in the park
 - For **entrance**, enter a registered license plate number in the **StartBarrierFrontEnd1** component (entrance barrier).
