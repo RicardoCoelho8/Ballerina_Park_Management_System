@@ -1,0 +1,3 @@
+Label,# Samples,Average,Min,Max,Std. Dev.,Error %,Throughput,Received KB/sec,Sent KB/sec,Avg. Bytes
+Ballerina HTTP 1.1 500 users:bzm - HTTP2 Sampler,500,19,15,128,5.62,0.000%,5.01128,11.98,0.00,2448.0
+TOTAL,500,19,15,128,5.62,0.000%,5.01128,11.98,0.00,2448.0

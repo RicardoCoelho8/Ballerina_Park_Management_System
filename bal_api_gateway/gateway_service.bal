@@ -83,6 +83,11 @@ function sendForbiddenResponse(http:Caller caller) returns http:ListenerError? {
 
 service / on apiListener {
 
+    function init() {
+        // Initialization logic
+        log:printInfo("Service is ready to handle requests.");
+    }
+
     // User routes ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     
     resource function post users/[string... path](http:Caller caller, http:Request req) returns error? {
