@@ -12,7 +12,8 @@ Special thanks to all the team members whose dedication and expertise were cruci
 * Member 5: Rui Soares
 
 ## Documentation
-For more information on Park Management System, please refer to our comprehensive documentation included in the Wiki repository.        
+
+For more information on Park Management System, please refer to our comprehensive documentation included in the parent Wiki repository [Park Management System documentation](https://github.com/RicardoCoelho8/Park_Management_System/wiki).        
 
 ## How to Use and Clone the System
 ### Prerequisites
