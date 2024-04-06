@@ -2,10 +2,13 @@
 
 ## Introduction
 
-This report presents the result of the performance test conducted on the API Gateways implemented in **Ballerina** and *
-*Spring Boot**.
+This report presents the result of the performance test conducted on the API Gateways implemented in **Ballerina** and **Spring Boot**.
 The focus is on comparing the performance across two different protocol versions: **HTTP 1.1** and **HTTP 2**, for each
 technology.
+
+Some concepts were considered in the test, such as the use of **Ahead-of-Time (AOT) compilation** and **Just-in-Time (JIT) compilation** when using **GraalVM** to compile the Ballerina code.
+- **JIT Compilation** optimizes code at runtime, dynamically adapting to runtime conditions.
+- **AOT Compilation** precompiles code into native machine code before execution, providing faster startup and reduced runtime overhead.
 
 ## Methodology
 
