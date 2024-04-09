@@ -22,7 +22,7 @@ Before you begin, ensure you have the following installed:
 Git
 * Docker (for running microservices)
 * Node.js and npm (for the React frontend)
-* Java (for springboot microservices)
+* Java and Maven (for springboot microservices)
 * Ballerina (for ballerina api gateway)
 
 ### Cloning the Repository
