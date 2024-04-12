@@ -22,6 +22,7 @@ services:
     networks:
       - park20
 
+  #Spring API Gateway
   gateway:
     depends_on:
       eureka:
@@ -36,27 +37,11 @@ services:
       - "8080:8080"
     networks:
       - park20
-      
-  # ballerina_gateway:
-    # depends_on:
-      # eureka:
-        # condition: service_started
-    # build:
-      # context: ./bal_api_gateway
-      # dockerfile: Dockerfile
-    # environment:
-      # eureka.client.service-url.defaultZone: http://host.docker.internal:8761/eureka
-      # eureka.instance.ip-address: host.docker.internal
-    # ports:
-      # - "9090:9090"
-    # networks:
-      # - park20
 
   #Park BackOffice 1
-  park_bo_mcs_1:
+  parks:
     depends_on:
       - eureka
-    container_name: park_bo_mcs_1
     build: ./park_bo_mcs
     restart: on-failure
     environment:
@@ -67,18 +52,15 @@ services:
       spring.rabbitmq.host: rabbitmq4
       server.port: 8094
       spring.profiles.active: bootstrap
-
     ports:
       - "8094:8094"
     networks:
       - park20
 
-
   #Payment BackOffice 1
-  payments_bo_mcs_1:
+  payments:
     depends_on:
       - eureka
-    container_name: payments_bo_mcs_1
     build: ./payments_bo_mcs
     restart: on-failure
     environment:
@@ -95,10 +77,9 @@ services:
       - park20
 
   #User BackOffice 1
-  users_bo_mcs_1:
+  users:
     depends_on:
       - eureka
-    container_name: users_bo_mcs_1
     build: ./users_bo_mcs
     restart: on-failure
     environment:
@@ -115,10 +96,9 @@ services:
       - park20
 
   #Display FrontEnd 1
-  display_mcs_fe_1:
+  display1:
     depends_on:
       - eureka
-    container_name: display_mcs_fe_1
     build: ./display_mcs_fe
     restart: on-failure
     environment:
@@ -134,10 +114,9 @@ services:
       - park20
 
   #Display FrontEnd 2
-  display_mcs_fe_2:
+  display2:
     depends_on:
       - eureka
-    container_name: display_mcs_fe_2
     build: ./display_mcs_fe
     restart: on-failure
     environment:
@@ -153,10 +132,9 @@ services:
       - park20
 
   #Barrier FrontEnd 1
-  barrier_mcs_fe_1:
+  barrier1:
     depends_on:
       - eureka
-    container_name: barrier_mcs_fe_1
     build: ./barrier_mcs_fe
     restart: on-failure
     environment:
@@ -175,10 +153,9 @@ services:
       - park20
 
   #Barrier FrontEnd 2
-  barrier_mcs_fe_2:
+  barrier2:
     depends_on:
       - eureka
-    container_name: barrier_mcs_fe_2
     build: ./barrier_mcs_fe
     restart: on-failure
     environment:
@@ -193,5 +170,18 @@ services:
       spring.profiles.active: bootstrap
     ports:
       - "8202:8202"
+    networks:
+      - park20
+
+  #Ballerina API Gateway
+  ballgateway:
+    build:
+      context: ./bal_api_gateway/target/docker/bal_api_gateway
+      dockerfile: Dockerfile
+    environment:
+      eureka.client.service-url.defaultZone: http://host.docker.internal:8761/eureka
+      eureka.instance.ip-address: host.docker.internal
+    ports:
+      - "9090:9090"
     networks:
       - park20
