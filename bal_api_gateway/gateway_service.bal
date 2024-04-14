@@ -6,6 +6,10 @@ string secretKey = "jhewiwrvmqere3"; // The key used for HMAC256 algorithm
 string userId = "";
 string role = "";
 
+string mcsUsers = "users";
+string mcsParks = "parks";
+string mcsPayments = "payments";
+
 listener http:Listener apiListener = new(9090, {
     httpVersion: "2.0"
 });
@@ -97,7 +101,7 @@ service / on apiListener {
         }
 
         // Forward request to user microservice
-        http:Client userServiceClient = check new("http://users:8090");
+        http:Client userServiceClient = check new("http://"+ mcsUsers + ":8090");
         anydata response = check userServiceClient->post(fullPath, req);
         return caller->respond(response);
     }
@@ -109,7 +113,7 @@ service / on apiListener {
         }
 
         // Forward request to user microservice
-        http:Client userServiceClient = check new("http://users:8090");
+        http:Client userServiceClient = check new("http://"+ mcsUsers + ":8090");
         anydata response = check userServiceClient->put(fullPath, req);
         return caller->respond(response);
     }
@@ -127,7 +131,7 @@ service / on apiListener {
         };
 
         // Forward request to user microservice
-        http:Client userServiceClient = check new("http://users:8090");
+        http:Client userServiceClient = check new("http://"+ mcsUsers + ":8090");
         anydata response = check userServiceClient->get(fullPath, headers);
         return caller->respond(response);
     }
@@ -145,7 +149,7 @@ service / on apiListener {
         };
 
         // Forward request to user microservice
-        http:Client userServiceClient = check new("http://users:8090");
+        http:Client userServiceClient = check new("http://"+ mcsUsers + ":8090");
         anydata response = check userServiceClient->get(fullPath, headers);
         return caller->respond(response);
     }
@@ -159,7 +163,7 @@ service / on apiListener {
         }
 
         // Forward request to park microservice
-        http:Client parkServiceClient = check new("http://parks:8094");
+        http:Client parkServiceClient = check new("http://"+ mcsParks + ":8094");
         anydata response = check parkServiceClient->put(fullPath, req);
         return caller->respond(response);
     }
@@ -171,7 +175,7 @@ service / on apiListener {
         }
 
         // Forward request to park microservice
-        http:Client parkServiceClient = check new("http://parks:8094");
+        http:Client parkServiceClient = check new("http://"+ mcsParks + ":8094");
         anydata response = check parkServiceClient->get(fullPath);
         return caller->respond(response);
     }
@@ -189,7 +193,7 @@ service / on apiListener {
         };
 
         // Forward request to park microservice
-        http:Client parkServiceClient = check new("http://parks:8094");
+        http:Client parkServiceClient = check new("http://"+ mcsParks + ":8094");
         anydata response = check parkServiceClient->get(fullPath, headers);
         return caller->respond(response);
     }
@@ -203,7 +207,7 @@ service / on apiListener {
         }
 
         // Forward request to park microservice
-        http:Client parkServiceClient = check new("http://barriers:8094");
+        http:Client parkServiceClient = check new("http://"+ mcsParks + ":8094");
         anydata response = check parkServiceClient->post(fullPath, req);
         return caller->respond(response);
     }
@@ -215,7 +219,7 @@ service / on apiListener {
         }
 
         // Forward request to park microservice
-        http:Client parkServiceClient = check new("http://barriers:8094");
+        http:Client parkServiceClient = check new("http://"+ mcsParks + ":8094");
         anydata response = check parkServiceClient->post(fullPath, req);
         return caller->respond(response);
     }
@@ -229,7 +233,7 @@ service / on apiListener {
         }
 
         // Forward request to payments microservice
-        http:Client paymentsServiceClient = check new("http://payments:8086");
+        http:Client paymentsServiceClient = check new("http://"+ mcsPayments +":8086");
         anydata response = check paymentsServiceClient->post(fullPath, req);
         return caller->respond(response);
     }
@@ -247,7 +251,7 @@ service / on apiListener {
         };
 
         // Forward request to payments microservice
-        http:Client paymentsServiceClient = check new("http://payments:8086");
+        http:Client paymentsServiceClient = check new("http://"+ mcsPayments +":8086");
         anydata response = check paymentsServiceClient->get(fullPath, headers);
         return caller->respond(response);
     }
