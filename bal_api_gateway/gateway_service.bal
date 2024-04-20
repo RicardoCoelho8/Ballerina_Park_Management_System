@@ -7,6 +7,7 @@ string userId = "";
 string role = "";
 
 string mcsUsers = "users";
+string mcsUsersPort = "8090";
 string mcsParks = "parks";
 string mcsPayments = "payments";
 
@@ -101,7 +102,7 @@ service / on apiListener {
         }
 
         // Forward request to user microservice
-        http:Client userServiceClient = check new("http://"+ mcsUsers + ":8090");
+        http:Client userServiceClient = check new("http://"+ mcsUsers + ":" + mcsUsersPort);
         anydata response = check userServiceClient->post(fullPath, req);
         return caller->respond(response);
     }
@@ -113,7 +114,7 @@ service / on apiListener {
         }
 
         // Forward request to user microservice
-        http:Client userServiceClient = check new("http://"+ mcsUsers + ":8090");
+        http:Client userServiceClient = check new("http://"+ mcsUsers + ":" + mcsUsersPort);
         anydata response = check userServiceClient->put(fullPath, req);
         return caller->respond(response);
     }
@@ -131,7 +132,7 @@ service / on apiListener {
         };
 
         // Forward request to user microservice
-        http:Client userServiceClient = check new("http://"+ mcsUsers + ":8090");
+        http:Client userServiceClient = check new("http://"+ mcsUsers + ":" + mcsUsersPort);
         anydata response = check userServiceClient->get(fullPath, headers);
         return caller->respond(response);
     }
