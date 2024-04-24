@@ -1,15 +1,8 @@
 package labdsoft.user_bo_mcs.controllers;
 
-import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.tags.Tag;
 import labdsoft.user_bo_mcs.communication.Subscribe;
 import labdsoft.user_bo_mcs.model.*;
 import labdsoft.user_bo_mcs.services.UserService;
-
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +11,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
-@Tag(name = "User", description = "Endpoints for managing users")
+import java.util.List;
+import java.util.Optional;
+import java.util.Set;
+
 @RestController
 @RequestMapping("/users")
 class UserController {
@@ -30,7 +26,6 @@ class UserController {
     @Autowired
     private UserService service;
 
-    @Operation(summary = "creates a customer")
     @PostMapping("/createUser")
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<UserDTO> create(@RequestBody UserOnCreation userBody) {
@@ -46,7 +41,6 @@ class UserController {
         }
     }
 
-    @Operation(summary = "login user")
     @PostMapping("/login")
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<AccessToken> login(@RequestBody UserCredentials userCredentials) {
@@ -66,7 +60,6 @@ class UserController {
         }
     }
 
-    @Operation(summary = "gets all users")
     @GetMapping("/getAllUsers")
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<List<UserDTO>> getAll(
@@ -89,7 +82,6 @@ class UserController {
         }
     }
 
-    @Operation(summary = "Add Vehicle for user")
     @PutMapping("/vehicle/{userId}")
     @ResponseStatus(HttpStatus.ACCEPTED)
     public ResponseEntity<VehicleOnCreation> addUserVehicle(@RequestHeader("X-UserId") String headerUserId,
@@ -119,7 +111,6 @@ class UserController {
         }
     }
 
-    @Operation(summary = "Changes user Payment Method")
     @PutMapping("/paymentMethod/{userId}")
     @ResponseStatus(HttpStatus.ACCEPTED)
     public ResponseEntity<PaymentDTO> changePaymentMethod(@RequestHeader("X-UserId") String headerUserId,
@@ -149,7 +140,6 @@ class UserController {
         }
     }
 
-    @Operation(summary = "gets all user vehicles")
     @GetMapping("/vehicles/{userId}")
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<Set<VehicleOnCreation>> getAllUserVehicles(@RequestHeader("X-UserId") String headerUserId,
@@ -178,7 +168,6 @@ class UserController {
         }
     }
 
-    @Operation(summary = "get user paymentMethod")
     @GetMapping("/paymentMethod/{userId}")
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<PaymentDTO> getUserPaymentMethod(@RequestHeader("X-UserId") String headerUserId,
@@ -207,7 +196,6 @@ class UserController {
         }
     }
 
-    @Operation(summary = "Adds parkies to one User or multiple Users")
     @PostMapping("/parkies")
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<Boolean> addParkiesToUsers(@RequestHeader("X-UserId") String headerUserId,
@@ -234,7 +222,6 @@ class UserController {
         }
     }
 
-    @Operation(summary = "Gets the parky wallet of a user")
     @GetMapping("/parkies/{userId}")
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<ParkyWalletDTO> getParkyWalletOfUser(@PathVariable Long userId) {

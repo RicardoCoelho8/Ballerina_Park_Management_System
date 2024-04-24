@@ -2,6 +2,8 @@ spring:
   application:
     name: API-GATEWAY
   cloud:
+    refresh:
+      enabled: false
     gateway:
       globalcors:
         corsConfigurations:
@@ -9,6 +11,8 @@ spring:
             allowedOrigins: "*"
             allowedMethods: "*"
             allowedHeaders: "*"
+
+
 
 server:
   port: 8080

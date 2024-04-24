@@ -1,7 +1,5 @@
 package labdsoft.user_bo_mcs.model;
 
-import org.apache.commons.lang3.Validate;
-
 import jakarta.persistence.Embeddable;
 import lombok.NoArgsConstructor;
 
@@ -14,7 +12,6 @@ public class Password {
     private String password;
 
     public Password(final String password) {
-        Validate.notNull(password, "Password cannot be null");
         this.password = password;
     }
 
