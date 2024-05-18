@@ -4,6 +4,6 @@ set start=%time%
 echo Start Time: %start%
 
 :: Start your service
-call .\target\bin\bal_api_gateway.exe
+call java -jar bal_api_gateway.jar
 
 endlocal
