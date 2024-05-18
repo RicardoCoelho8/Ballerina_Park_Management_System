@@ -229,5 +229,3 @@ Spring Boot, with AOT compilation, has significantly improved its startup times,
   - **Weaknesses**: Slightly higher resource consumption and response times compared to Ballerina in some scenarios.
 
 Both Ballerina and Spring Boot are suitable for different purposes and can be chosen based on specific project needs and environments. The decision between the two technologies will depend on the application's specific requirements and the infrastructure it operates within.
-
-```
