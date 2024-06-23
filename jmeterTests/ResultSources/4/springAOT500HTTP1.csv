@@ -1,3 +1,0 @@
-Label,# Samples,Average,Min,Max,Std. Dev.,Error %,Throughput,Received KB/sec,Sent KB/sec,Avg. Bytes
-Springboot HTTP 1.1 500 users:bzm - HTTP2 Sampler,500,14,11,32,2.93,0.000%,5.00962,12.30,0.00,2514.0
-TOTAL,500,14,11,32,2.93,0.000%,5.00962,12.30,0.00,2514.0

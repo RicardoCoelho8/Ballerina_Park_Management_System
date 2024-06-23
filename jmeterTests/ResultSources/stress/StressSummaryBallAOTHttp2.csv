@@ -1,3 +1,3 @@
-Label,# Samples,Average,Min,Max,Std. Dev.,Error %,Throughput,Received KB/sec,Sent KB/sec,Avg. Bytes
-Stress Ballerina HTTP 2 5900 users:bzm - HTTP2 Sampler,5900,38,3,290,38.06,7.915%,124.97352,294.73,0.00,2415.0
-TOTAL,5900,38,3,290,38.06,7.915%,124.97352,294.73,0.00,2415.0
+Label;# Samples;Average;Median;90% Line;95% Line;99% Line;Min;Max;Std. Dev.;Error %;Throughput;Received KB/sec;Sent KB/sec;Avg. Bytes
+Stress Ballerina HTTP 2 5900 users:bzm - HTTP2 Sampler;5900;38;46;90;104;129;3;290;38.06;7.915;124.97352;294.73;0.00;2415.0
+TOTAL;5900;38;46;90;104;129;3;290;38.06;7.915;124.97352;294.73;0.00;2415.0
