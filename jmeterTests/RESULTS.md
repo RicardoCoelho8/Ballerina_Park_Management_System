@@ -70,7 +70,7 @@ Bellow are the results obtained from the tests:
 | Ballerina (AOT)     | HTTP 2     | 2               | 10000     | 13        | 13     | 16       | 18          | 23        | 9   | 46  | 0.000%    | 99.98000         | 239.18            | 0.00          |
 | Ballerina           | HTTP 1.1   | 2               | 10000     | 10        | 11     | 13       | 14          | 17        | 7   | 36  | 0.000%    | 99.97201         | 239.58            | 0.00          |
 | Ballerina           | HTTP 2     | 2               | 10000     | 11        | 11     | 13       | 15          | 18        | 7   | 29  | 0.000%    | 99.99600         | 239.22            | 0.00          |
-| Java (AOT)          | HTTP 1.1   | 2               | 10000     | 12        | 12     | 15       | 17          | 25        | 9   | 117 | 0.000%    | 99.97900         | 239.60            | 0.00          |
+| Java (AOT)          | HTTP 1.1   | 2               | 10000     | 11        | 11     | 14       | 16          | 23        | 9   | 37  | 0.000%    | 99.98000         | 239.60            | 0.00          |
 | Java (AOT)          | HTTP 2     | 2               | 10000     | 12        | 12     | 14       | 16          | 23        | 8   | 34  | 0.000%    | 99.98000         | 239.18            | 0.00          |
 | Java                | HTTP 1.1   | 2               | 10000     | 11        | 11     | 12       | 14          | 17        | 8   | 22  | 0.000%    | 99.98600         | 239.61            | 0.00          |
 | Java                | HTTP 2     | 2               | 10000     | 11        | 11     | 13       | 14          | 17        | 8   | 22  | 0.000%    | 99.98800         | 239.20            | 0.00          |
@@ -152,18 +152,14 @@ Bellow are the results obtained from the tests:
 
 ### System Stress Test requests (~10% error rate)
 
-For this test, the number of threads was increased as many as possible to simulate a stress test.
+For this test, a stepping thread group was used, in order to increase the number of threads overtime, starting with 1 till the first timeout error is reached.
 
-| Technology      | Protocol | Samples | Average | Median | 90% Line | 95% Line | 99% Line | Min | Max | Std. Dev. | Error (%) | Throughput (sec) | Received (KB/sec) | Sent (KB/sec) | Avg. Bytes |
-|-----------------|----------|---------|---------|--------|----------|----------|----------|-----|-----|-----------|-----------|------------------|-------------------|---------------|------------|
-| Ballerina (AOT) | HTTP 1.1 | 5900    | 39      | 48     | 93       | 107      | 133      | 3   | 307 | 39.49     | 7.695     | 124.64087        | 298.75            | 0.00          | 2454.4     |
-| Ballerina (AOT) | HTTP 2   | 5900    | 38      | 46     | 90       | 104      | 129      | 3   | 290 | 38.06     | 7.915     | 124.97352        | 294.73            | 0.00          | 2415.0     |
-| Ballerina       | HTTP 1.1 | 2915    | 38      | 74     | 85       | 82       | 105      | 3   | 412 | 31.13     | 8.199     | 58.83065         | 141.03            | 0.00          | 2454.8     |
-| Ballerina       | HTTP 2   | 2915    | 31      | 38     | 73       | 83       | 103      | 5   | 370 | 30.20     | 8.096     | 58.83778         | 138.77            | 0.00          | 2415.2     |
-| Java (AOT)      | HTTP 1.1 | 5900    | 28      | 38     | 78       | 90       | 113      | 3   | 301 | 35.10     | 7.705     | 124.58124        | 295.23            | 0.00          | 2515.4     |
-| Java (AOT)      | HTTP 2   | 5900    | 28      | 37     | 75       | 87       | 109      | 3   | 295 | 33.61     | 7.695     | 124.60245        | 294.96            | 0.00          | 2515.0     |
-| Java            | HTTP 1.1 | 2915    | 27      | 30     | 56       | 63       | 77       | 4   | 248 | 21.40     | 8.096     | 58.62714         | 144.01            | 0.00          | 2515.4     |
-| Java            | HTTP 2   | 2915    | 27      | 30     | 56       | 64       | 78       | 4   | 246 | 21.62     | 8.027     | 58.81997         | 144.49            | 0.00          | 2515.4     |
+| Technology      | Number of threads simultaneous | Samples |
+|-----------------|--------------------------------|---------|
+| Ballerina (AOT) | 15                             | 10846   |
+| Ballerina       | 15                             | 10246   |
+| Java (AOT)      | 7627                           | 40181   |
+| Java            | 7651                           | 118546  |
 
 ### Startup times:
 
@@ -207,8 +203,8 @@ With the AOT compilation, Ballerina demonstrates a mean time of ~66ms to launch 
 
 ## Stress Test
 
-Under stress testing conditions, Ballerina leverages the AOT compilation to handle more requests per second, as seen in the Throughput. 
-But compared to Java, Ballerina has some improvements to do, especially in terms of response times.
+From the results of the stress test, is clear that Ballerina cant handle a lot of threads simultaneously with a high load of requests at the same time. 
+Compared to Java, Ballerina needs to improve its performance under stress to be a good candidate for distributed applications.
 
 ## HTTP /1.1 vs HTTP/2.0
 

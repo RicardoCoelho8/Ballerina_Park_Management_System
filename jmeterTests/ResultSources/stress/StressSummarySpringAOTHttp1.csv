@@ -1,3 +1,0 @@
-Label;# Samples;Average;Median;90% Line;95% Line;99% Line;Min;Max;Std. Dev.;Error %;Throughput;Received KB/sec;Sent KB/sec;Avg. Bytes
-Stress Springboot HTTP 1.1 5900 users:bzm - HTTP2 Sampler;5900;28;38;78;90;113;3;301;35.10;7.705;124.58124;295.23;0.00;2515.4
-TOTAL;5900;28;38;78;90;113;3;301;35.10;7.705;124.58124;295.23;0.00;2515.4
