@@ -150,7 +150,7 @@ Bellow are the results obtained from the tests:
 | Java (AOT)      | ~9.229                    |
 | Java            | ~10.487                   |
 
-### System Stress Test requests (~10% error rate)
+### System Stress Test requests
 
 For this test, a stepping thread group was used, in order to increase the number of threads overtime, starting with 1 till the first timeout error is reached.
 
