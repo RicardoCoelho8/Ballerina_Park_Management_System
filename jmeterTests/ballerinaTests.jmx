@@ -7,12 +7,11 @@
         <collectionProp name="Arguments.arguments">
           <elementProp name="authorization" elementType="Argument">
             <stringProp name="Argument.name">authorization</stringProp>
-            <stringProp name="Argument.value">Bearer eyJhbGciOiJIUzI1NiIsICJ0eXAiOiJKV1QifQ.eyJzdWIiOiIxIiwgImV4cCI6MTcxOTE5OTU1NSwgIm5iZiI6MTcxOTE5MzU1NSwgImlhdCI6MTcxOTE5MzU1NSwgInJvbGUiOiJTVVBFUlZJU09SIn0.v5M6ajFJC6LfwmkhfNzWvKtKCnch3ZBcS2m-l-TuRyE</stringProp>
+            <stringProp name="Argument.value">Bearer eyJhbGciOiJIUzI1NiIsICJ0eXAiOiJKV1QifQ.eyJzdWIiOiIxIiwgImV4cCI6MTcxOTI1NDEwOSwgIm5iZiI6MTcxOTI0ODEwOSwgImlhdCI6MTcxOTI0ODEwOSwgInJvbGUiOiJTVVBFUlZJU09SIn0.XLwfDZC7Zji5RwzmluRk6QdFQ9baMMm3HR02HNmAjXc</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
         </collectionProp>
       </elementProp>
-      <boolProp name="TestPlan.functional_mode">false</boolProp>
     </TestPlan>
     <hashTree>
       <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="Ballerina HTTP 1.1 100 users" enabled="false">
@@ -675,13 +674,12 @@
         </ResultCollector>
         <hashTree/>
       </hashTree>
-      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="Ballerina HTTP 1.1 1000 users" enabled="false">
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="Ballerina HTTP 1.1 1000 users">
         <intProp name="ThreadGroup.num_threads">1000</intProp>
         <intProp name="ThreadGroup.ramp_time">100</intProp>
         <longProp name="ThreadGroup.duration">600</longProp>
         <longProp name="ThreadGroup.delay">1</longProp>
-        <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
-        <boolProp name="ThreadGroup.scheduler">true</boolProp>
+        <boolProp name="ThreadGroup.same_user_on_next_iteration">false</boolProp>
         <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
         <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller">
           <stringProp name="LoopController.loops">10</stringProp>
@@ -727,7 +725,7 @@
           <boolProp name="HTTP2Sampler.http1_upgrade">false</boolProp>
         </com.blazemeter.jmeter.http2.sampler.HTTP2Sampler>
         <hashTree/>
-        <ResultCollector guiclass="SummaryReport" testclass="ResultCollector" testname="Summary Report" enabled="true">
+        <ResultCollector guiclass="SummaryReport" testclass="ResultCollector" testname="Summary Report">
           <boolProp name="ResultCollector.error_logging">false</boolProp>
           <objProp>
             <name>saveConfig</name>
@@ -765,7 +763,7 @@
           <boolProp name="useGroupName">true</boolProp>
         </ResultCollector>
         <hashTree/>
-        <ResultCollector guiclass="StatVisualizer" testclass="ResultCollector" testname="Aggregate Report" enabled="true">
+        <ResultCollector guiclass="StatVisualizer" testclass="ResultCollector" testname="Aggregate Report">
           <boolProp name="ResultCollector.error_logging">false</boolProp>
           <objProp>
             <name>saveConfig</name>
@@ -802,7 +800,7 @@
           <stringProp name="filename"></stringProp>
         </ResultCollector>
         <hashTree/>
-        <ResultCollector guiclass="TableVisualizer" testclass="ResultCollector" testname="View Results in Table" enabled="true">
+        <ResultCollector guiclass="TableVisualizer" testclass="ResultCollector" testname="View Results in Table">
           <boolProp name="ResultCollector.error_logging">false</boolProp>
           <objProp>
             <name>saveConfig</name>

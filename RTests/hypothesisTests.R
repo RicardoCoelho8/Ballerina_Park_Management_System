@@ -75,8 +75,8 @@ skewness(ConjuntoAverageTimeHttp2)
 
 
 
-# Null hypothesis (H0): There is no significant differences in performance between HTTP/1.1 and HTTP/2.
-# Alternative hypothesis (H1): There is a significant differences in performance between HTTP/1.1 and HTTP/2.
+# Null hypothesis (H0): There are no significant differences in performance between HTTP/1.1 and HTTP/2.
+# Alternative hypothesis (H1): There are significant differences in performance between HTTP/1.1 and HTTP/2.
 valor_p <- wilcox.test(ConjuntoAverageTimeHttp1,ConjuntoAverageTimeHttp2, paired=FALSE)$p.value
 valor_p
 
@@ -103,8 +103,8 @@ skewness(ConjuntoAverageTimeBal)
 
 
 
-# Null hypothesis (H0): There is no significant differences in performance between BAL AOT and BAL.
-# Alternative hypothesis (H1): There is a significant differences in performance between AOT and BAL.
+# Null hypothesis (H0): There are no significant differences in performance between BAL AOT and BAL.
+# Alternative hypothesis (H1): There are significant differences in performance between AOT and BAL.
 valor_p <- wilcox.test(ConjuntoAverageTimeBalAOT,ConjuntoAverageTimeBal, paired=FALSE)$p.value
 valor_p
 
@@ -131,8 +131,8 @@ skewness(ConjuntoAverageTimeJava)
 
 
 
-# Null hypothesis (H0): There is no significant differences in performance between BAL and JAVA.
-# Alternative hypothesis (H1): There is a significant differences in performance between BAL and JAVA.
+# Null hypothesis (H0): There are no significant differences in performance between BAL and JAVA.
+# Alternative hypothesis (H1): There are significant differences in performance between BAL and JAVA.
 valor_p <- wilcox.test(ConjuntoAverageTimeBal,ConjuntoAverageTimeJava, paired=FALSE)$p.value
 valor_p
 
@@ -159,8 +159,8 @@ skewness(ConjuntoAverageTimeJavaAOT)
 
 
 
-# Null hypothesis (H0): There is no significant differences in performance between BAL AOT and JAVA AOT.
-# Alternative hypothesis (H1): There is a significant differences in performance between BAL AOT and JAVA AOT.
+# Null hypothesis (H0): There are no significant differences in performance between BAL AOT and JAVA AOT.
+# Alternative hypothesis (H1): There are significant differences in performance between BAL AOT and JAVA AOT.
 valor_p <- wilcox.test(ConjuntoAverageTimeBalAOT,ConjuntoAverageTimeJavaAOT, paired=FALSE)$p.value
 valor_p
 
