@@ -6,13 +6,14 @@ listener http:Listener apiListener = new(9092, {
     httpVersion: "2.0"
 });
 
-service /users on apiListener{
+isolated service /users on apiListener{
+
     function init() {
         // Initialization logic
         log:printInfo("User service is ready to handle requests.");
     }
     
-    resource function post createUser(http:Caller caller, http:Request request) returns error?{
+    resource isolated function post createUser(http:Caller caller, http:Request request) returns error?{
         http:Response response = new;
         json payload = check request.getJsonPayload();
         UserOnCreation userOnCreation = check payload.cloneWithType(UserOnCreation);
@@ -30,7 +31,7 @@ service /users on apiListener{
         }
     }
 
-    resource function post login(http:Caller caller, http:Request request) returns error?{
+    resource isolated function post login(http:Caller caller, http:Request request) returns error?{
         http:Response response = new;
         json payload = check request.getJsonPayload();
         UserCredentials userOnLogin = check payload.cloneWithType(UserCredentials);
@@ -48,7 +49,7 @@ service /users on apiListener{
         }
     }
 
-    resource function get getAllUsers(http:Caller caller, http:Request request) returns error?{
+    resource isolated function get getAllUsers(http:Caller caller, http:Request request) returns error?{
         http:Response response = new;
 
         var headerRole = check request.getHeader("X-UserRole");
@@ -71,7 +72,7 @@ service /users on apiListener{
         }
     }
 
-    resource function put vehicle/[int userId](http:Caller caller, http:Request request) returns error? {
+    resource isolated function put vehicle/[int userId](http:Caller caller, http:Request request) returns error? {
         http:Response response = new;
         json payload = check request.getJsonPayload();
         VehicleOnCreation vehicleOnCreation = check payload.cloneWithType(VehicleOnCreation);
@@ -104,7 +105,7 @@ service /users on apiListener{
         }
     }
 
-    resource function put paymentMethod/[int userId](http:Caller caller, http:Request request) returns error? {
+    resource isolated function put paymentMethod/[int userId](http:Caller caller, http:Request request) returns error? {
         http:Response response = new;
         json payload = check request.getJsonPayload();
         PaymentRequestRecord paymentRequest = check payload.cloneWithType(PaymentRequestRecord);
@@ -137,7 +138,7 @@ service /users on apiListener{
         }
     }
 
-    resource function get vehicles/[int userId](http:Caller caller, http:Request request) returns error? {
+    resource isolated function get vehicles/[int userId](http:Caller caller, http:Request request) returns error? {
         http:Response response = new;
 
         var headerRole = check request.getHeader("X-UserRole");
@@ -168,7 +169,7 @@ service /users on apiListener{
         }
     }
 
-    resource function get paymentMethod/[int userId](http:Caller caller, http:Request request) returns error? {
+    resource isolated function get paymentMethod/[int userId](http:Caller caller, http:Request request) returns error? {
         http:Response response = new;
 
         var headerRole = check request.getHeader("X-UserRole");
@@ -199,7 +200,7 @@ service /users on apiListener{
         }
     }
 
-    resource function post parkies(http:Caller caller, http:Request request) returns error? {
+    resource isolated function post parkies(http:Caller caller, http:Request request) returns error? {
         http:Response response = new;
         json payload = check request.getJsonPayload();
         ParkyTransactionRequest parkyTransactionRequest = check payload.cloneWithType(ParkyTransactionRequest);
@@ -227,7 +228,7 @@ service /users on apiListener{
         }
     }
 
-    resource function get parkies/[int userId](http:Caller caller, http:Request request) returns error? {
+    resource isolated function get parkies/[int userId](http:Caller caller, http:Request request) returns error? {
         http:Response response = new;
 
         json|error? result = getParkyWalletOfUser(userId);

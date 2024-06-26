@@ -1,17 +1,16 @@
+import ballerina/jwt;
 import ballerina/regex;
 import ballerina/sql;
-import ballerina/jwt;
 import ballerinax/postgresql;
 import ballerinax/postgresql.driver as _;
 
 // jwt configurations -----------------------------------------------------------------------------------
-string secretKey = "jhewiwrvmqere3"; 
+final string secretKey = "jhewiwrvmqere3";
 
 // DATABASE CONFIGS -------------------------------------------------------------------------------------
 
-postgresql:Client userDBClient = check new ("localhost", "postgres", "postgrespw", "postgres", 5510);
-int currentUsers = 6;
-
+final postgresql:Client userDBClient = check new ("localhost", "postgres", "postgrespw", "postgres", 5510);
+isolated int currentUsers = 6;
 
 // DOMAIN -----------------------------------------------------------------------------------------------
 
@@ -19,7 +18,7 @@ public class AccessToken {
     string? token;
     string? name;
 
-    public function init(string token, string name) {
+    public isolated function init(string token, string name) {
         self.token = token;
         self.name = name;
     }
@@ -35,11 +34,11 @@ public class AccessToken {
 public class Email {
     string? email;
 
-    public function init(string email) {
+    public isolated function init(string email) {
         self.email = email;
     }
 
-    public function getEmail() returns string? {
+    public isolated function getEmail() returns string? {
         return self.email;
     }
 };
@@ -48,16 +47,16 @@ public class Name {
     string firstName;
     string lastName;
 
-    public function init(string firstName, string lastName) {
+    public isolated function init(string firstName, string lastName) {
         self.firstName = firstName;
         self.lastName = lastName;
     }
 
-    public function getFirstName() returns string {
+    public isolated function getFirstName() returns string {
         return self.firstName;
     }
 
-    public function getLastName() returns string {
+    public isolated function getLastName() returns string {
         return self.lastName;
     }
 };
@@ -68,7 +67,7 @@ public class ParkingHistory {
     string? endTime;
     int parkId;
 
-    public function init(string parkingHistoryId, string startTime, string endTime, int parkId) {
+    public isolated function init(string parkingHistoryId, string startTime, string endTime, int parkId) {
         self.parkingHistoryId = parkingHistoryId;
         self.startTime = startTime;
         self.endTime = endTime;
@@ -92,7 +91,7 @@ public class ParkyTransactionEvent {
     int? managerId;
     string? transaction_time;
 
-    public function init(int event_id, int? amount, string? reason, int? managerId, string transaction_time) {
+    public isolated function init(int event_id, int? amount, string? reason, int? managerId, string transaction_time) {
         self.event_id = event_id;
         self.amount = amount;
         self.reason = reason;
@@ -100,7 +99,7 @@ public class ParkyTransactionEvent {
         self.transaction_time = transaction_time;
     }
 
-    public function getAmount() returns int? {
+    public isolated function getAmount() returns int? {
         return self.amount;
     }
 
@@ -120,17 +119,17 @@ public class ParkyWallet {
     int parkies;
     ParkyTransactionEvent[] parkyEvents;
 
-    public function init(int? id, int parkies, ParkyTransactionEvent[] parkyEvents) {
+    public isolated function init(int? id, int parkies, ParkyTransactionEvent[] parkyEvents) {
         self.id = id;
         self.parkies = parkies;
         self.parkyEvents = parkyEvents;
     }
 
-    public function getParkies() returns int {
+    public isolated function getParkies() returns int {
         return self.parkies;
     }
 
-    public function addEvent(ParkyTransactionEvent event) returns boolean {
+    public isolated function addEvent(ParkyTransactionEvent event) returns boolean {
         if (self.parkies + event.getAmount() < 0) {
             return false;
         }
@@ -146,7 +145,7 @@ public class ParkyWalletDTO {
     int? parkies;
     ParkyTransactionEvent[]? parkyEvents;
 
-    public function init(int? userId, int? parkies, ParkyTransactionEvent[]? parkyEvents) {
+    public isolated function init(int? userId, int? parkies, ParkyTransactionEvent[]? parkyEvents) {
         self.userId = userId;
         self.parkies = parkies;
         self.parkyEvents = parkyEvents;
@@ -164,16 +163,16 @@ public class ParkyWalletDTO {
 public class Password {
     string password;
 
-    public function init(string password) {
+    public isolated function init(string password) {
         self.password = password;
     }
 
-    public function getPassword() returns string {
+    public isolated function getPassword() returns string {
         return self.password;
     }
 };
 
-public function isValidPassword(string? password) returns boolean {
+public isolated function isValidPassword(string? password) returns boolean {
     string auxPassword = password.toString();
     boolean isValid = regex:matches(auxPassword, "(?=.*\\b)(?=.*[a-z])(?=.*[A-Z])((?=.*\\W)|(?=.*_))^[^ ]+$");
     if (!(auxPassword.length() > 10 && isValid == true && auxPassword.length() < 20)) {
@@ -186,7 +185,7 @@ public function isValidPassword(string? password) returns boolean {
 public class PaymentDTO {
     PaymentMethod? paymentMethod;
 
-    public function init(PaymentMethod paymentMethod) {
+    public isolated function init(PaymentMethod paymentMethod) {
         self.paymentMethod = paymentMethod;
     }
 
@@ -220,11 +219,11 @@ public enum UserStatus {
 public class TaxIdNumber {
     int nif;
 
-    public function init(int nif) {
+    public isolated function init(int nif) {
         self.nif = nif;
     }
 
-    public function getNif() returns int {
+    public isolated function getNif() returns int {
         return self.nif;
     }
 };
@@ -234,7 +233,7 @@ public class Top10ParkyDTO {
     string? email;
     int? parkies;
 
-    public function init(string? name, string? email, int? parkies) {
+    public isolated function init(string? name, string? email, int? parkies) {
         self.name = name;
         self.email = email;
         self.parkies = parkies;
@@ -258,7 +257,7 @@ public class Vehicle {
     VehicleType vehicleType;
     VehicleEnergySource vehicleEnergySource;
 
-    public function init(string licensePlate, VehicleType vehicleType, VehicleEnergySource vehicleEnergySource) {
+    public isolated function init(string licensePlate, VehicleType vehicleType, VehicleEnergySource vehicleEnergySource) {
         self.licensePlate = licensePlate;
         self.vehicleType = vehicleType;
         self.vehicleEnergySource = vehicleEnergySource;
@@ -277,7 +276,7 @@ public class VehicleOutput {
     Vehicle[] vehicles;
     json vehiclesJson;
 
-    public function init(Vehicle[] vehicles, json vehiclesJson) {
+    public isolated function init(Vehicle[] vehicles, json vehiclesJson) {
         self.vehicles = vehicles;
         self.vehiclesJson = vehiclesJson;
     }
@@ -287,7 +286,7 @@ public class ParkyTransitionEventOutput {
     ParkyTransactionEvent[] parkyEvents;
     json parkyEventsJson;
 
-    public function init(ParkyTransactionEvent[] parkyEvents, json parkyEventsJson) {
+    public isolated function init(ParkyTransactionEvent[] parkyEvents, json parkyEventsJson) {
         self.parkyEvents = parkyEvents;
         self.parkyEventsJson = parkyEventsJson;
     }
@@ -297,7 +296,7 @@ public class ParkingHistoryOutput {
     ParkingHistory[] parkingHistory;
     json parkingHistoryJson;
 
-    public function init(ParkingHistory[] parkingHistory, json parkingHistoryJson) {
+    public isolated function init(ParkingHistory[] parkingHistory, json parkingHistoryJson) {
         self.parkingHistory = parkingHistory;
         self.parkingHistoryJson = parkingHistoryJson;
     }
@@ -316,7 +315,7 @@ public class UserDTO {
     PaymentMethod? paymentMethod;
     UserStatus? status;
 
-    public function init(int? userId, string? firstName, string? lastName, string? email, int? nif, ParkingHistory[]? parkingHistory, int parkies, Vehicle[]? vehicles, Role? role, PaymentMethod? paymentMethod, UserStatus? status) {
+    public isolated function init(int? userId, string? firstName, string? lastName, string? email, int? nif, ParkingHistory[]? parkingHistory, int parkies, Vehicle[]? vehicles, Role? role, PaymentMethod? paymentMethod, UserStatus? status) {
         self.userId = userId;
         self.firstName = firstName;
         self.lastName = lastName;
@@ -373,7 +372,7 @@ public class User {
     PaymentMethod paymentMethod;
     UserStatus status;
 
-    public function init(int? userId, Name name, Email email, Password password, TaxIdNumber nif, ParkingHistory[] parkingHistory, Vehicle[] vehicles, ParkyWallet parkies, Role role, PaymentMethod paymentMethod, UserStatus status) {
+    public isolated function init(int? userId, Name name, Email email, Password password, TaxIdNumber nif, ParkingHistory[] parkingHistory, Vehicle[] vehicles, ParkyWallet parkies, Role role, PaymentMethod paymentMethod, UserStatus status) {
         self.userId = userId;
         self.name = name;
         self.email = email;
@@ -387,11 +386,11 @@ public class User {
         self.status = status;
     }
 
-    public function setRole(Role role) {
+    public isolated function setRole(Role role) {
         self.role = role;
     }
 
-    public function addVehicle(Vehicle vehicle) returns boolean {
+    public isolated function addVehicle(Vehicle vehicle) returns boolean {
         if (self.vehicles.length() >= 3) {
             return false;
         }
@@ -399,11 +398,11 @@ public class User {
         return true;
     }
 
-    public function addParkyTransactionEvent(ParkyTransactionEvent event) returns boolean {
+    public isolated function addParkyTransactionEvent(ParkyTransactionEvent event) returns boolean {
         return self.parkies.addEvent(event);
     }
 
-    public function toDto(User user) returns UserDTO {
+    public isolated function toDto(User user) returns UserDTO {
         return new UserDTO(user.userId, user.name.getFirstName(), user.name.getLastName(), user.email.getEmail(), user.nif.getNif(), [], user.parkies.getParkies(), [], user.role, user.paymentMethod, user.status);
     }
 };
@@ -501,18 +500,18 @@ public type VehicleRecord record {
 };
 
 // AUX FUNCTIONS ----------------------------------------------------------------------------------------
-public function isContain(int[] array1, int id) returns boolean {
+public isolated function isContain(int[] array1, int id) returns boolean {
     return array1.indexOf(id) != ();
 }
 
-public function parseInt(int? value) returns int {
+public isolated function parseInt(int? value) returns int {
     if (value == null) {
         return 0;
     }
     return value;
 };
 
-public function mapStringToInt(anydata types) returns int {
+public isolated function mapStringToInt(anydata types) returns int {
     match types {
         AUTOMOBILE => {
             return 0;
@@ -571,7 +570,7 @@ public function mapStringToInt(anydata types) returns int {
     }
 };
 
-public function mapIntToRole(int number) returns Role {
+public isolated function mapIntToRole(int number) returns Role {
     match number {
         0 => {
             return SUPERVISOR;
@@ -591,7 +590,7 @@ public function mapIntToRole(int number) returns Role {
     }
 };
 
-public function mapIntToPaymentMethod(int number) returns PaymentMethod {
+public isolated function mapIntToPaymentMethod(int number) returns PaymentMethod {
     match number {
         0 => {
             return CREDIT;
@@ -608,7 +607,7 @@ public function mapIntToPaymentMethod(int number) returns PaymentMethod {
     }
 };
 
-public function mapIntToUserStatus(int number) returns UserStatus {
+public isolated function mapIntToUserStatus(int number) returns UserStatus {
     match number {
         0 => {
             return ENABLED;
@@ -625,7 +624,7 @@ public function mapIntToUserStatus(int number) returns UserStatus {
     }
 };
 
-public function mapIntToVehicleType(int number) returns VehicleType {
+public isolated function mapIntToVehicleType(int number) returns VehicleType {
     match number {
         0 => {
             return AUTOMOBILE;
@@ -639,7 +638,7 @@ public function mapIntToVehicleType(int number) returns VehicleType {
     }
 };
 
-public function mapIntToVehicleEnergySource(int number) returns VehicleEnergySource {
+public isolated function mapIntToVehicleEnergySource(int number) returns VehicleEnergySource {
     match number {
         0 => {
             return FUEL;
@@ -659,21 +658,21 @@ public function mapIntToVehicleEnergySource(int number) returns VehicleEnergySou
     }
 };
 
-public function getVehiclesByUserId(int user_id) returns VehicleOutput|error{
+public isolated function getVehiclesByUserId(int user_id) returns VehicleOutput|error {
     stream<UserVehicleJOINRecord, error?> vehicleStream = userDBClient->query(`select auv.user_user_id, v.license_plate_number, v.vehicle_energy_source, v.vehicle_type from app_user_vehicles as auv join vehicle as v on auv.vehicles_license_plate_number = v.license_plate_number where auv.user_user_id = ${user_id};`, UserVehicleJOINRecord);
 
     Vehicle[] vehicles = [];
     string rawData = "";
-    check from UserVehicleJOINRecord vehicle in vehicleStream 
+    check from UserVehicleJOINRecord vehicle in vehicleStream
         do {
             Vehicle vehicleDto = new Vehicle(vehicle.license_plate_number, mapIntToVehicleType(vehicle.vehicle_type), mapIntToVehicleEnergySource(vehicle.vehicle_energy_source));
             vehicles.push(vehicleDto);
             rawData = rawData + vehicleDto.toJson().toString() + ",";
         };
     check vehicleStream.close();
-    if(rawData == "") {
+    if (rawData == "") {
         rawData = "[]";
-    }else {
+    } else {
         rawData = rawData.substring(0, rawData.length() - 1);
         rawData = "[" + rawData + "]";
     }
@@ -682,12 +681,12 @@ public function getVehiclesByUserId(int user_id) returns VehicleOutput|error{
     return new VehicleOutput(vehicles, usersJson);
 };
 
-public function getParkingHistoryByUserId(int user_id) returns ParkingHistoryOutput|error{
+public isolated function getParkingHistoryByUserId(int user_id) returns ParkingHistoryOutput|error {
     stream<ParkingHistoryRecord, error?> parkingHistoryStream = userDBClient->query(`select aup.user_user_id, p.parking_history_id, p.park_id, p.start_time from app_user_parking_history as aup join parking_history as p on aup.parking_history_parking_history_id = p.parking_history_id where aup.user_user_id = ${user_id};`, ParkingHistoryRecord);
 
     ParkingHistory[] parkingHistory = [];
     string rawData = "";
-    check from ParkingHistoryRecord parkingHistoryRecord in parkingHistoryStream 
+    check from ParkingHistoryRecord parkingHistoryRecord in parkingHistoryStream
         do {
             ParkingHistory parkingHistoryDto = new ParkingHistory(parkingHistoryRecord.parking_history_id, parkingHistoryRecord.start_time, parkingHistoryRecord.end_time, parkingHistoryRecord.park_id);
             parkingHistory.push(parkingHistoryDto);
@@ -695,10 +694,9 @@ public function getParkingHistoryByUserId(int user_id) returns ParkingHistoryOut
         };
     check parkingHistoryStream.close();
 
-    
-    if(rawData == "") {
+    if (rawData == "") {
         rawData = "[]";
-    }else {
+    } else {
         rawData = rawData.substring(0, rawData.length() - 1);
         rawData = "[" + rawData + "]";
     }
@@ -707,12 +705,12 @@ public function getParkingHistoryByUserId(int user_id) returns ParkingHistoryOut
     return new ParkingHistoryOutput(parkingHistory, usersJson);
 };
 
-public function getParkyTransitionEventsByUserId(int user_id) returns ParkyTransitionEventOutput|error{
+public isolated function getParkyTransitionEventsByUserId(int user_id) returns ParkyTransitionEventOutput|error {
     stream<ParkyTransactionEventRecord, error?> parkyEventsStream = userDBClient->query(`select awpe.parky_wallet_id, p.event_id, p.amount, p.manager_id, p.reason, p.transaction_time from parky_wallet_parky_events as awpe join parky_transaction_event as p on awpe.parky_events_event_id = p.event_id where awpe.parky_wallet_id = ${user_id};`, ParkyTransactionEventRecord);
 
     ParkyTransactionEvent[] parkyEvents = [];
     string rawData = "";
-    check from ParkyTransactionEventRecord parkyEvent in parkyEventsStream 
+    check from ParkyTransactionEventRecord parkyEvent in parkyEventsStream
         do {
             ParkyTransactionEvent parkyEventDto = new ParkyTransactionEvent(parkyEvent.event_id, parkyEvent.amount, parkyEvent.reason, parkyEvent.manager_id, parkyEvent.transaction_time);
             parkyEvents.push(parkyEventDto);
@@ -720,9 +718,9 @@ public function getParkyTransitionEventsByUserId(int user_id) returns ParkyTrans
         };
     check parkyEventsStream.close();
 
-    if(rawData == "") {
+    if (rawData == "") {
         rawData = "[]";
-    }else {
+    } else {
         rawData = rawData.substring(0, rawData.length() - 1);
         rawData = "[" + rawData + "]";
     }
@@ -732,19 +730,24 @@ public function getParkyTransitionEventsByUserId(int user_id) returns ParkyTrans
 };
 
 // SERVICES ---------------------------------------------------------------------------------------------
-public function create(UserOnCreation userOnCreation) returns json|error? {
+public isolated function create(UserOnCreation userOnCreation) returns json|error? {
     boolean validation = isValidPassword(userOnCreation.password);
 
     if (!validation) {
         return error("Password must have at least 10 characters, one uppercase letter, one lowercase letter and one special character");
     }
 
-    currentUsers = currentUsers + 1;
+    int aux;
+    lock{
+        currentUsers = currentUsers + 1;
+        aux = currentUsers;
+    }
+
     Name name = new Name(userOnCreation.firstName.toString(), userOnCreation.lastName.toString());
     //Since ballerina doesn't support de encode of bcrypt passwords, that validation will be validated hardcoded (default password is "123PasswordX#")
     string hashedPassword = "$2a$10$EnT4g0WsLUSH2ixKFAxeSu8l806WN0l890C2f3MbrPT11RqYCSykC";
-    User user = new User(currentUsers, name, new Email(userOnCreation.email.toString()), new Password(hashedPassword), new TaxIdNumber(parseInt(userOnCreation.nif)), [], [new Vehicle(userOnCreation.licensePlateNumber, userOnCreation.vehicleType, userOnCreation.vehicleEnergySource)], new ParkyWallet(currentUsers, 0, []), CUSTOMER, userOnCreation.paymentMethod, ENABLED);
-    
+    User user = new User(aux, name, new Email(userOnCreation.email.toString()), new Password(hashedPassword), new TaxIdNumber(parseInt(userOnCreation.nif)), [], [new Vehicle(userOnCreation.licensePlateNumber, userOnCreation.vehicleType, userOnCreation.vehicleEnergySource)], new ParkyWallet(aux, 0, []), CUSTOMER, userOnCreation.paymentMethod, ENABLED);
+
     sql:ExecutionResult _ = check userDBClient->execute(`insert into parky_wallet (id, parkies) values (${user.userId}, 0);`);
     sql:ExecutionResult _ = check userDBClient->execute(`insert into app_user (user_id, email, first_name, last_name, nif, password, payment_method, role, status, parkies_id) values (${user.userId}, ${user.email.getEmail()}, ${user.name.getFirstName()}, ${user.name.getLastName()}, ${user.nif.getNif()}, ${user.password.getPassword()}, ${mapStringToInt(user.paymentMethod)}, ${mapStringToInt(user.role)}, ${mapStringToInt(user.status)}, ${user.userId});`);
     sql:ExecutionResult _ = check userDBClient->execute(`insert into vehicle (license_plate_number, vehicle_energy_source, vehicle_type) values (${user.vehicles[0].licensePlate}, ${mapStringToInt(user.vehicles[0].vehicleEnergySource)}, ${mapStringToInt(user.vehicles[0].vehicleType)});`);
@@ -753,24 +756,24 @@ public function create(UserOnCreation userOnCreation) returns json|error? {
     return user.toDto(user).toJson();
 };
 
-public function login(UserCredentials UserCredentials) returns json|error? {
+public isolated function login(UserCredentials UserCredentials) returns json|error? {
     UserRecord queryResult = check userDBClient->queryRow(`select * from app_user where email = ${UserCredentials.email};`);
     UserRecord user = check queryResult.cloneWithType(UserRecord);
-    
+
     //Since ballerina doesn't support de decode of bcrypt passwords, that validation will be validated hardcoded (default password is "123PasswordX#")
     string unhashedPassword = "123PasswordX#";
 
     jwt:IssuerConfig issuerConfig = {
         username: user.user_id.toString(),
         expTime: 6000,
-        customClaims: { "role": mapIntToRole(user.role) },
+        customClaims: {"role": mapIntToRole(user.role)},
         signatureConfig: {
             algorithm: "HS256",
             config: secretKey
         }
     };
 
-    if(unhashedPassword != UserCredentials.password) {
+    if (unhashedPassword != UserCredentials.password) {
         return error("Invalid credentials");
     }
 
@@ -778,11 +781,11 @@ public function login(UserCredentials UserCredentials) returns json|error? {
     return new AccessToken(token, user.first_name).toJson();
 };
 
-public function getAll() returns json|error? {
+public isolated function getAll() returns json|error? {
     stream<UserRecord, error?> userStream = userDBClient->query(`select * from app_user;`, UserRecord);
 
     string rawData = "";
-    check from UserRecord user in userStream 
+    check from UserRecord user in userStream
         do {
             VehicleOutput userOutput = check getVehiclesByUserId(user.user_id);
             ParkingHistoryOutput parkingHistoryOutput = check getParkingHistoryByUserId(user.user_id);
@@ -792,9 +795,9 @@ public function getAll() returns json|error? {
         };
     check userStream.close();
 
-    if(rawData == "") {
+    if (rawData == "") {
         rawData = "[]";
-    }else {
+    } else {
         rawData = rawData.substring(0, rawData.length() - 1);
         rawData = "[" + rawData + "]";
     }
@@ -803,12 +806,12 @@ public function getAll() returns json|error? {
     return usersJson;
 };
 
-public function addVehicle(int userId, VehicleOnCreation vehicleOnCreation) returns json|error? {
+public isolated function addVehicle(int userId, VehicleOnCreation vehicleOnCreation) returns json|error? {
     Vehicle vehicle = new Vehicle(vehicleOnCreation.licensePlateNumber, vehicleOnCreation.vehicleType, vehicleOnCreation.vehicleEnergySource);
-    
+
     stream<UserVehicleRecord, error?> vehicleStream = userDBClient->query(`select * from app_user_vehicles where user_user_id = ${userId};`, UserVehicleRecord);
     int vehicleCount = 0;
-    check from UserVehicleRecord _ in vehicleStream 
+    check from UserVehicleRecord _ in vehicleStream
         do {
             vehicleCount = vehicleCount + 1;
         };
@@ -823,8 +826,8 @@ public function addVehicle(int userId, VehicleOnCreation vehicleOnCreation) retu
     return vehicle.toJson();
 };
 
-public function changePaymentMethod(int userId, PaymentRequestRecord paymentRequestRecord) returns json|error? {
-    if(paymentRequestRecord.paymentMethod == NOT_DEFINED) {
+public isolated function changePaymentMethod(int userId, PaymentRequestRecord paymentRequestRecord) returns json|error? {
+    if (paymentRequestRecord.paymentMethod == NOT_DEFINED) {
         return error("Can't change payment method back to undefined");
     }
 
@@ -832,11 +835,11 @@ public function changePaymentMethod(int userId, PaymentRequestRecord paymentRequ
     return new PaymentDTO(paymentRequestRecord.paymentMethod).toJson();
 };
 
-public function getAllUserVehicles(int userId) returns json|error? {
+public isolated function getAllUserVehicles(int userId) returns json|error? {
     stream<VehicleRecord, error?> vehicleStream = userDBClient->query(`select v.* from app_user_vehicles as auv join vehicle as v on auv.vehicles_license_plate_number = v.license_plate_number where auv.user_user_id = ${userId};`, VehicleRecord);
 
     string rawData = "";
-    check from VehicleRecord vehicle in vehicleStream 
+    check from VehicleRecord vehicle in vehicleStream
         do {
             Vehicle vehicleDto = new Vehicle(vehicle.license_plate_number, mapIntToVehicleType(vehicle.vehicle_type), mapIntToVehicleEnergySource(vehicle.vehicle_energy_source));
             rawData = rawData + vehicleDto.toJson().toString() + ",";
@@ -850,23 +853,23 @@ public function getAllUserVehicles(int userId) returns json|error? {
     return vehiclesJson;
 };
 
-public function getUserPaymentMethod(int userId) returns json|error? {
+public isolated function getUserPaymentMethod(int userId) returns json|error? {
     UserRecord queryResult = check userDBClient->queryRow(`select * from app_user where user_id = ${userId};`);
     UserRecord user = check queryResult.cloneWithType(UserRecord);
 
     return new PaymentDTO(mapIntToPaymentMethod(user.payment_method)).toJson();
 };
 
-public function addParkiesToUsers(ParkyTransactionRequest parkyTransactionRequest, int managerId) returns boolean|error? {
+public isolated function addParkiesToUsers(ParkyTransactionRequest parkyTransactionRequest, int managerId) returns boolean|error? {
     stream<UserRecord, error?> userStream = userDBClient->query(`select * from app_user;`, UserRecord);
 
     if (parkyTransactionRequest.amount <= 0) {
         return error("Invalid users provided!");
     }
 
-    check from UserRecord user in userStream 
+    check from UserRecord user in userStream
         do {
-            if(isContain(parkyTransactionRequest.userIds, user.user_id)) {
+            if (isContain(parkyTransactionRequest.userIds, user.user_id)) {
                 ParkyTransactionEvent event = new ParkyTransactionEvent(0, parkyTransactionRequest.amount, parkyTransactionRequest.reason, managerId, "now");
                 int rows = check userDBClient->queryRow(`select count(*) from parky_transaction_event;`);
                 sql:ExecutionResult _ = check userDBClient->execute(`insert into parky_transaction_event (event_id, amount, reason, manager_id, transaction_time) values (${rows + 1}, ${event.amount}, ${event.reason}, ${event.managerId}, now());`);
@@ -879,7 +882,7 @@ public function addParkiesToUsers(ParkyTransactionRequest parkyTransactionReques
     return true;
 };
 
-public function getParkyWalletOfUser(int userId) returns json|error? {
+public isolated function getParkyWalletOfUser(int userId) returns json|error? {
     int parkies = check userDBClient->queryRow(`select parkies from parky_wallet where id = ${userId};`);
     ParkyTransitionEventOutput parkyEventsOutput = check getParkyTransitionEventsByUserId(userId);
     ParkyWalletDTO parkyWalletDTO = new ParkyWalletDTO(userId, parkies, parkyEventsOutput.parkyEvents);
