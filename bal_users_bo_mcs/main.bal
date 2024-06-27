@@ -9,7 +9,7 @@ final string secretKey = "jhewiwrvmqere3";
 
 // DATABASE CONFIGS -------------------------------------------------------------------------------------
 
-final postgresql:Client userDBClient = check new ("localhost", "postgres", "postgrespw", "postgres", 5510);
+final postgresql:Client userDBClient = check new ("db_users_bo_mcs_1", "postgres", "postgrespw", "postgres", 5510);
 isolated int currentUsers = 6;
 
 // DOMAIN -----------------------------------------------------------------------------------------------
