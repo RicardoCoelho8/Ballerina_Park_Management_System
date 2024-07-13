@@ -3,7 +3,13 @@ import ballerina/log;
 import ballerina/lang.'int as langint;
 
 listener http:Listener apiListener = new(9092, {
-    httpVersion: "2.0"
+    httpVersion: "2.0",
+    secureSocket: {
+        key: {
+            path: "localhost.p12",
+            password: "localhost"
+        }
+    }
 });
 
 isolated service /users on apiListener{
