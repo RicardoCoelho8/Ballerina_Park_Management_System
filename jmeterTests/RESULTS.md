@@ -154,12 +154,30 @@ Bellow are the results obtained from the tests:
 
 For this test, a stepping thread group was used, in order to increase the number of threads overtime, starting with 1 till the first timeout error is reached.
 
-| Technology      | Number of threads simultaneous | Samples |
-|-----------------|--------------------------------|---------|
-| Ballerina (AOT) | 15                             | 10846   |
-| Ballerina       | 15                             | 10246   |
-| Java (AOT)      | 7627                           | 40181   |
-| Java            | 7651                           | 118546  |
+| Technology      | Protocol | Number of threads simultaneous |
+|-----------------|----------|--------------------------------|
+| Ballerina (AOT) | HTTP 1.1 | 16                             |
+| Ballerina (AOT) | HTTP 2   | 16                             |
+| Ballerina       | HTTP 1.1 | 16                             |
+| Ballerina       | HTTP 2   | 16                             |
+| Java (AOT)      | HTTP 1.1 | 7627                           |
+| Java (AOT)      | HTTP 2   | 3853                           |
+| Java            | HTTP 1.1 | 7651                           |
+| Java            | HTTP 2   | 2711                           |
+
+After several tests, it was noted that the user's ballerina application limits the use of a maximum of 14 users simultaneously regardless of the compilation and HTTP protocol. It is not known for sure why this happens, but it is believed that it is because of the way data is accessed within the database (SQL statements).
+Therefore, the original user's application will be used to compare the values of the API gateways in the two languages and the two types of compilation.
+
+| Technology      | Protocol | Number of threads simultaneous |
+|-----------------|----------|--------------------------------|
+| Ballerina (AOT) | HTTP 1.1 | 1900                           |
+| Ballerina (AOT) | HTTP 2   | 1896                           |
+| Ballerina       | HTTP 1.1 | 2041                           |
+| Ballerina       | HTTP 2   | 1780                           |
+| Java (AOT)      | HTTP 1.1 | 7627                           |
+| Java (AOT)      | HTTP 2   | 3853                           |
+| Java            | HTTP 1.1 | 7651                           |
+| Java            | HTTP 2   | 2711                           |
 
 ### Startup times:
 
@@ -203,7 +221,7 @@ With the AOT compilation, Ballerina demonstrates a mean time of ~66ms to launch 
 
 ## Stress Test
 
-From the results of the stress test, is clear that Ballerina cant handle a lot of threads simultaneously with a high load of requests at the same time. 
+From the results of the stress test, is clear that Ballerina cant handle a lot of users simultaneously with a high load of requests at the same time. 
 Compared to Java, Ballerina needs to improve its performance under stress to be a good candidate for distributed applications.
 
 ## HTTP /1.1 vs HTTP/2.0
