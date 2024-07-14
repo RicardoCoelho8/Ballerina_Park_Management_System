@@ -32,13 +32,13 @@ There is 2 tests one for the load test and another for the stress test, the load
 
 | Technology              | Protocol | Endpoint                                   |
 |-------------------------|----------|--------------------------------------------|
-| Ballerina GraalVM (AOT) | HTTP 1.1 | `http://localhost:9090/users/getAllUsers`  |
+| Ballerina GraalVM (AOT) | HTTP 1.1 | `https://localhost:9090/users/getAllUsers` |
 | Ballerina GraalVM (AOT) | HTTP 2   | `https://localhost:9090/users/getAllUsers` |
-| Ballerina               | HTTP 1.1 | `http://localhost:9090/users/getAllUsers`  |
+| Ballerina               | HTTP 1.1 | `https://localhost:9090/users/getAllUsers` |
 | Ballerina               | HTTP 2   | `https://localhost:9090/users/getAllUsers` |
-| Java (AOT)              | HTTP 1.1 | `http://localhost:8080/users/getAllUsers`  |
+| Java (AOT)              | HTTP 1.1 | `https://localhost:8080/users/getAllUsers` |
 | Java (AOT)              | HTTP 2   | `https://localhost:8080/users/getAllUsers` |
-| Java                    | HTTP 1.1 | `http://localhost:8080/users/getAllUsers`  |
+| Java                    | HTTP 1.1 | `https://localhost:8080/users/getAllUsers` |
 | Java                    | HTTP 2   | `https://localhost:8080/users/getAllUsers` |
 
 ## Results
@@ -146,9 +146,9 @@ For this test, a stepping thread group was used, in order to increase the number
 | Ballerina       | HTTP 1.1 | 14                |
 | Ballerina       | HTTP 2   | 14                |
 | Java (AOT)      | HTTP 1.1 | 7644              |
-| Java (AOT)      | HTTP 2   | 4645              |
+| Java (AOT)      | HTTP 2   | 14379             |
 | Java            | HTTP 1.1 | 7941              |
-| Java            | HTTP 2   | 4343              |
+| Java            | HTTP 2   | 9985              |
 
 After several tests, it was noted that the user's ballerina application limits the use of a maximum of 14 users simultaneously regardless of the compilation and HTTP protocol. It is not known for sure why this happens, but it is believed that it is because of the way data is accessed within the database (SQL statements).
 Therefore, the original user's application will be used to compare the values of the API gateways in the two languages and the two types of compilation.
@@ -156,13 +156,13 @@ Therefore, the original user's application will be used to compare the values of
 | Technology      | Protocol | Number of threads simultaneous |
 |-----------------|----------|--------------------------------|
 | Ballerina (AOT) | HTTP 1.1 | 3142                           |
-| Ballerina (AOT) | HTTP 2   | 2638                           |
+| Ballerina (AOT) | HTTP 2   | 4177                           |
 | Ballerina       | HTTP 1.1 | 3241                           |
-| Ballerina       | HTTP 2   | 3245                           |
+| Ballerina       | HTTP 2   | 3973                           |
 | Java (AOT)      | HTTP 1.1 | 7644                           |
-| Java (AOT)      | HTTP 2   | 4645                           |
+| Java (AOT)      | HTTP 2   | 14379                          |
 | Java            | HTTP 1.1 | 7941                           |
-| Java            | HTTP 2   | 4343                           |
+| Java            | HTTP 2   | 9985                           |
 
 # Results Analysis
 
@@ -177,7 +177,7 @@ Ballerina can't hold a high load configuration in both AOT or default compilatio
 
 ## HTTP/1.1 vs HTTP/2.0
 
-Analysing the results, in terms of load tests no pattern can be detected, sometimes the use of HTTP/2 brings advantages and sometimes not, even though there is no significant difference between the versions of the HTTP protocol. As far as stress tests are concerned, it can be seen that there is a limitation to HTTP/2 and its capacity drops by an average of 40%.
+Analysing the results, in terms of load tests no pattern can be detected, sometimes the use of HTTP/2 brings advantages and sometimes not, even though there is no significant difference between the versions of the HTTP protocol. As far as stress tests are concerned, it can be seen that with HTTP/2 the applications can handle more requests as expected since it has features that allow the server to handle more requests at the same time.
 
 ## Conclusion
 
