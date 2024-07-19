@@ -889,3 +889,238 @@ public isolated function getParkyWalletOfUser(int userId) returns json|error? {
 
     return parkyWalletDTO.toJsonWithParkyEventJson(parkyEventsOutput.parkyEventsJson);
 };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// GET ALL ALTERNATIVE TO NOT USE SEVERAL STREAMS SINCE IT MAKE THE PERFORMANCE OF THE SERVICE WORSE -----------------------------------------------------------------------------------------------------
+public isolated function mapStringToVehicleType(string number) returns VehicleType {
+    match number {
+        "0" => {
+            return AUTOMOBILE;
+        }
+        "1" => {
+            return MOTORCYCLE;
+        }
+        _ => {
+            return AUTOMOBILE;
+        }
+    }
+};
+
+public isolated function mapStringToVehicleEnergySource(string number) returns VehicleEnergySource {
+    match number {
+        "0" => {
+            return FUEL;
+        }
+        "1" => {
+            return GPL;
+        }
+        "2" => {
+            return ELECTRIC;
+        }
+        "3" => {
+            return PLUG_IN_HYBRID;
+        }
+        _ => {
+            return FUEL;
+        }
+    }
+};
+
+// Define records to hold the data from different tables.
+type CombinedUserRecord record {
+    int user_id;
+    string first_name;
+    string last_name;
+    string email;
+    int nif;
+    int role;
+    int payment_method;
+    int status;
+    int parkies;
+    string? vehicles;
+    string? parking_history;
+};
+
+// Define a UserDTO record for the final JSON response.
+public class UserDTO2 {
+    int userId;
+    string firstName;
+    string lastName;
+    string email;
+    int nif;
+    json parkingHistory;
+    int parkies;
+    json vehicles;
+    string role;
+    string paymentMethod;
+    string status;
+
+    isolated function init (int userId, string firstName, string lastName, string email, int nif, json parkingHistory, int parkies, json vehicles, string role, string paymentMethod, string status) {
+        self.userId = userId;
+        self.firstName = firstName;
+        self.lastName = lastName;
+        self.email = email;
+        self.nif = nif;
+        self.parkingHistory = parkingHistory;
+        self.parkies = parkies;
+        self.vehicles = vehicles;
+        self.role = role;
+        self.paymentMethod = paymentMethod;
+        self.status = status;
+    }
+
+    isolated function toJson() returns json {
+        return {
+            id: self.userId,
+            firstName: self.firstName,
+            lastName: self.lastName,
+            email: self.email,
+            nif: self.nif,
+            parkingHistory: self.parkingHistory,
+            totalParkies: self.parkies,
+            vehicles: self.vehicles,
+            role: self.role,
+            paymentMethod: self.paymentMethod,
+            userStatus: self.status
+        };
+    }
+};
+
+public isolated function getAll2() returns json|error {
+    // Execute the single query
+    stream<CombinedUserRecord, sql:Error?> userStream = userDBClient->query(`
+        WITH vehicles AS (
+            SELECT 
+                auv.user_user_id,
+                string_agg(
+                    v.license_plate_number || ';' || 
+                    v.vehicle_energy_source || ';' || 
+                    v.vehicle_type, 
+                    ',') AS vehicles
+            FROM 
+                app_user_vehicles auv
+            JOIN 
+                vehicle v ON auv.vehicles_license_plate_number = v.license_plate_number
+            GROUP BY 
+                auv.user_user_id
+        ),
+        parking_history AS (
+            SELECT 
+                aup.user_user_id,
+                string_agg(
+                    p.parking_history_id || ';' || 
+                    p.start_time || ';' || 
+                    p.end_time || ';' || 
+                    p.park_id, 
+                    ',') AS parking_history
+            FROM 
+                app_user_parking_history aup
+            JOIN 
+                parking_history p ON aup.parking_history_parking_history_id = p.parking_history_id
+            GROUP BY 
+                aup.user_user_id
+        )
+        SELECT 
+            u.user_id,
+            u.first_name,
+            u.last_name,
+            u.email,
+            u.nif,
+            u.role,
+            u.payment_method,
+            u.status,
+            w.parkies,
+            v.vehicles,
+            ph.parking_history
+        FROM 
+            app_user u
+        LEFT JOIN 
+            parky_wallet w ON u.user_id = w.id
+        LEFT JOIN 
+            vehicles v ON u.user_id = v.user_user_id
+        LEFT JOIN 
+            parking_history ph ON u.user_id = ph.user_user_id;
+    `);
+
+    // Initialize an array to hold the final user data
+    json[] usersArray = [];
+    check from CombinedUserRecord user in userStream
+        do {
+            json userVehicles = user.vehicles != "" ? processVehicles(user.vehicles) : [];
+            json userParkingHistory = user.parking_history != "" ? processParkingHistory(user.parking_history) : [];
+
+            UserDTO2 userDto = new UserDTO2 (
+                user.user_id,
+                user.first_name,
+                user.last_name,
+                user.email,
+                user.nif,
+                userParkingHistory,
+                user.parkies,
+                userVehicles,
+                mapIntToRole(user.role),
+                mapIntToPaymentMethod(user.payment_method),
+                mapIntToUserStatus(user.status)
+            );
+            usersArray.push(userDto.toJson());
+        };
+    check userStream.close();
+
+    // Return the final JSON response
+    return usersArray.toJson();
+}
+
+// Helper function to process vehicle string data
+isolated function processVehicles(string? vehicles) returns json {
+    if(vehicles == ()){
+        return [].toJson();
+    }else{
+        string[] vehicleRecords = regex:split(vehicles.toString(), ",");
+        json[] vehicleArray = [];
+        foreach var vehicleRecord in vehicleRecords {
+            string[] fields = regex:split(vehicleRecord, ";");
+            json vehicleJson = {
+                licensePlateNumber: fields[0],
+                vehicleType: mapStringToVehicleType(fields[2]),
+                vehicleEnergySource: mapStringToVehicleEnergySource(fields[1])
+            };
+            vehicleArray.push(vehicleJson);
+        }
+        return vehicleArray.toJson();
+    }
+}
+
+// Helper function to process parking history string data
+isolated function processParkingHistory(string? parkingHistory) returns json {
+    if(parkingHistory == ()){
+        return [].toJson();
+    }else{
+        string[] historyRecords = regex:split(parkingHistory.toString(), ",");
+        json[] historyArray = [];
+        foreach var historyRecord in historyRecords {
+            string[] fields = regex:split(historyRecord, ";");
+            json historyJson = {
+                parking_history_id: fields[0],
+                start_time: fields[3],
+                end_time: fields[1],
+                park_id: fields[2]
+            };
+            historyArray.push(historyJson);
+        }
+        return historyArray.toJson();
+    }
+}

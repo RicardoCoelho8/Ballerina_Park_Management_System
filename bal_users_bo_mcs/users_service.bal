@@ -65,7 +65,7 @@ isolated service /users on apiListener{
             return caller->respond(response);
         }
 
-        json|error? result = getAll();
+        json|error? result = getAll2();
 
         if (result is error?) {
             response.statusCode = 409;

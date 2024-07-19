@@ -18,12 +18,12 @@ export const options = {
   ],
   summaryTimeUnit: "ms",
   insecureSkipTLSVerify: true,
-  stages: Array.from({ length: 100 }, (_, i) => ({ duration: '1s', target: (i + 1) * 100 })),
+  stages: Array.from({ length: 100 }, (_, i) => ({ duration: '1s', target: (i + 1) * 200 })),
 };
 
 export default function() {
   const isHttp2 = true;
-  let authToken = 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwicm9sZSI6IlNVUEVSVklTT1IiLCJleHAiOjE3MjA4MzEwNDR9.QomuOOUeX3xucUuEDzNnbrLsGSfMjLh7HNxEBI0Zyx4';
+  let authToken = 'Bearer eyJhbGciOiJIUzI1NiIsICJ0eXAiOiJKV1QifQ.eyJzdWIiOiIxIiwgImV4cCI6MTcyMTM1NzkwNSwgIm5iZiI6MTcyMTM1MTkwNSwgImlhdCI6MTcyMTM1MTkwNSwgInJvbGUiOiJTVVBFUlZJU09SIn0.54saM2eNwQrZU1tMn_cDXy67nvWU3GOf-a5CU2XDL3g';
   let checkResult;
   let res;
   let headers = {
@@ -39,7 +39,7 @@ export default function() {
     });
 
   } else {
-    res = http.get('http://localhost:9090/users/getAllUsers', { headers: headers });
+    res = http.get('http://localhost:8080/users/getAllUsers', { headers: headers });
 
     checkResult = check(res, {
       'status is 200': (r) => r.status === 200,

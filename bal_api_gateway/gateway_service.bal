@@ -19,7 +19,13 @@ type validateJwtResponse record {
 };
 
 listener http:Listener apiListener = new (9090, {
-    httpVersion: "2.0"
+    httpVersion: "2.0",
+    secureSocket: {
+        key: {
+            path: "localhost.p12",
+            password: "localhost"
+        }
+    }
 });
 
 final readonly & map<http:Method> unauthenticatedRoutes = {
@@ -111,7 +117,7 @@ isolated service / on apiListener {
         }
 
         // Forward request to user microservice
-        http:Client userServiceClient = check new ("http://" + mcsUsers + ":" + mcsUsersPort);
+        http:Client userServiceClient = check new ("https://" + mcsUsers + ":" + mcsUsersPort, secureSocket = {enable: false});
         anydata response = check userServiceClient->post(fullPath, req);
         return caller->respond(response);
     }
@@ -145,7 +151,7 @@ isolated service / on apiListener {
         };
 
         // Forward request to user microservice
-        http:Client userServiceClient = check new ("http://" + mcsUsers + ":" + mcsUsersPort);
+        http:Client userServiceClient = check new ("https://" + mcsUsers + ":" + mcsUsersPort, secureSocket = {enable: false});
         anydata response = check userServiceClient->get(fullPath, headers);
         return caller->respond(response);
     }
