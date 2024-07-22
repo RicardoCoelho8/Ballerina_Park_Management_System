@@ -30,17 +30,14 @@ export default function() {
     'Authorization': authToken,
   };
 
-  if(isHttp2) {
-    res = http.get('https://localhost:9090/users/getAllUsers', { headers: headers });
+  res = http.get('https://localhost:9090/users/getAllUsers', { headers: headers });
 
+  if(isHttp2) {
     checkResult = check(res, {
       'status is 200': (r) => r.status === 200,
       'protocol is HTTP/2': (r) => r.proto === 'HTTP/2.0',
     });
-
   } else {
-    res = http.get('http://localhost:8080/users/getAllUsers', { headers: headers });
-
     checkResult = check(res, {
       'status is 200': (r) => r.status === 200,
       'protocol is HTTP/1': (r) => r.proto === 'HTTP/1.1',

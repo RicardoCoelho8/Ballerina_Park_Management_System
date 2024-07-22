@@ -24,24 +24,21 @@ export const options = {
 
 export default function() {
   const isHttp2 = false;
-  let authToken = 'Bearer eyJhbGciOiJIUzI1NiIsICJ0eXAiOiJKV1QifQ.eyJzdWIiOiIxIiwgImV4cCI6MTcyMDgzMTY1MCwgIm5iZiI6MTcyMDgyNTY1MCwgImlhdCI6MTcyMDgyNTY1MCwgInJvbGUiOiJTVVBFUlZJU09SIn0.F2xU_qqudxRWWvQjS3n4JfEfB_L6E9G-zEHRzLbCyDc';
+  let authToken = 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwicm9sZSI6IlNVUEVSVklTT1IiLCJleHAiOjE3MjIxNjE4Nzd9.7g9RLZB1vJgafpbgdW7t5znO3I_3a5KJZrUlm_oIYZo';
   let checkResult;
   let res;
   let headers = {
     'Authorization': authToken,
   };
 
-  if(isHttp2) {
-    res = http.get('https://localhost:9090/users/getAllUsers', { headers: headers });
+  res = http.get('https://localhost:9090/users/getAllUsers', { headers: headers });
 
+  if(isHttp2) {
     checkResult = check(res, {
       'status is 200': (r) => r.status === 200,
       'protocol is HTTP/2': (r) => r.proto === 'HTTP/2.0',
     });
-
   } else {
-    res = http.get('http://localhost:9090/users/getAllUsers', { headers: headers });
-
     checkResult = check(res, {
       'status is 200': (r) => r.status === 200,
       'protocol is HTTP/1': (r) => r.proto === 'HTTP/1.1',
@@ -58,15 +55,18 @@ export default function() {
 }
 
 export function handleSummary(data) {
-  const requests = data.metrics.http_reqs.count;
-  const duration = data.metrics.iteration_duration.sum / 1000;
-  const throughput = requests / duration;  
+  const requests = data.metrics.http_reqs.values.count;
+  const duration = data.metrics.iteration_duration.values.sum / 1000;  // Convert to seconds
+  const throughput = requests / duration;
+
+  console.log(`Requests: ${requests}`);
+  console.log(`Duration: ${duration.toFixed(2)}s`);
+  console.log(`Throughput: ${throughput.toFixed(2)} reqs/s`);
 
   // Add the throughput metric to the data
   data.throughput = throughput;
 
   return {
     "results/loadTest.html": htmlReport(data),
-    stdout: `Throughput: ${throughput} requests/sec`,
   };
 }
