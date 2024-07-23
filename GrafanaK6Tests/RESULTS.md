@@ -141,46 +141,39 @@ For this test, a stepping thread group was used, in order to increase the number
 
 | Technology      | Protocol | Max Number of VUs |
 |-----------------|----------|-------------------|
-| Ballerina (AOT) | HTTP 1.1 | 14                |
-| Ballerina (AOT) | HTTP 2   | 14                |
-| Ballerina       | HTTP 1.1 | 14                |
-| Ballerina       | HTTP 2   | 14                |
+| Ballerina (AOT) | HTTP 1.1 | 9579              |
+| Ballerina (AOT) | HTTP 2   | 11373             |
+| Ballerina       | HTTP 1.1 | 8381              |
+| Ballerina       | HTTP 2   | 9172              |
 | Java (AOT)      | HTTP 1.1 | 7644              |
-| Java (AOT)      | HTTP 2   | 14379             |
-| Java            | HTTP 1.1 | 7941              |
-| Java            | HTTP 2   | 9985              |
-
-After several tests, it was noted that the user's ballerina application limits the use of a maximum of 14 users simultaneously regardless of the compilation and HTTP protocol. It is not known for sure why this happens, but it is believed that it is because of the way data is accessed within the database (SQL statements).
-Therefore, the original user's application will be used to compare the values of the API gateways in the two languages and the two types of compilation.
-
-| Technology      | Protocol | Number of threads simultaneous |
-|-----------------|----------|--------------------------------|
-| Ballerina (AOT) | HTTP 1.1 | 3142                           |
-| Ballerina (AOT) | HTTP 2   | 4177                           |
-| Ballerina       | HTTP 1.1 | 3241                           |
-| Ballerina       | HTTP 2   | 3973                           |
-| Java (AOT)      | HTTP 1.1 | 7644                           |
-| Java (AOT)      | HTTP 2   | 14379                          |
-| Java            | HTTP 1.1 | 7941                           |
-| Java            | HTTP 2   | 9985                           |
+| Java (AOT)      | HTTP 2   | 8984              |
+| Java            | HTTP 1.1 | 6356              |
+| Java            | HTTP 2   | 7757              |
 
 # Results Analysis
 
 ## General Performance
 
 This analysis compares the response times of Ballerina's performance compared to Java.
-Analysing the tables, Ballerina performs similarly to Java, sometimes with better results, but very similar. Regardless of its compilation, Ballerina obtains competitive results under lower load conditions.
+
+By analysing the load test tables it can be seen that Ballerina in general as better performance than Java, when focusing on the first configuration with 10 users simultaneously, Ballerina has a better performance in all cases in response times and throughput. 
+In the second configuration with 100 users simultaneously, Ballerina still has a better performance in terms of response times, although the throughput is lower than Java when the API Gateway is implemented in Java. 
+Leading to the conclusion that Ballerina has a better performance when communicating with other Ballerina services.
 
 ## Stress Test
 
-Ballerina can't hold a high load configuration in both AOT or default compilation, which points to potential stability issues
+From the system stress test, the conclusion is that Ballerina with its AOT compilation and HTTP/2 protocol has the best performance in scenarios of high load. It can handle more 24% of users at the same time as Java with the same configuration.
+Proving that Ballerina can be a good candidate for distributed systems, as it can handle several users at the same time in scenarios of high load, like black friday sales and other high traffic events.
 
 ## HTTP/1.1 vs HTTP/2.0
 
-Analysing the results, in terms of load tests no pattern can be detected, sometimes the use of HTTP/2 brings advantages and sometimes not, even though there is no significant difference between the versions of the HTTP protocol. As far as stress tests are concerned, it can be seen that with HTTP/2 the applications can handle more requests as expected since it has features that allow the server to handle more requests at the same time.
+As for the both HTTP protocols, as expected, HTTP/2.0 has a better performance than HTTP/1.1 in all the cases, as it has features that allow the server to handle more requests at the same time, leading to a better performance in all the cases.
 
 ## Conclusion
 
-Ballerina demonstrates competitive response times compared to Java under lower load conditions, making it a viable alternative for moderate traffic applications. However, it struggles with stability under high load, regardless of the compilation method used.
-Comparing HTTP/1.1 and HTTP/2.0 protocols, no consistent performance pattern emerges in load tests, with neither protocol showing a significant advantage. However, under stress, HTTP/2 experiences a substantial 40% drop in capacity.
-In summary, while Ballerina shows promise, it requires further optimization for high-load stability, and the choice between HTTP protocols remains context-dependent.
+The performance tests indicate that Ballerina is a strong candidate for distributed systems, particularly when using AOT compilation with HTTP/2. The results suggest the following:
+ - Efficiency: Ballerina provides faster response times and can handle more concurrent users compared to Java, making it a robust choice for high-load scenarios.
+ - Scalability: The superior performance of Ballerina in stress tests indicates its ability to scale effectively without significant degradation in performance.
+ - Protocol Utilization: Ballerina better utilizes HTTP/2 advantages, further enhancing its performance edge over Java.
+
+Given these points, Ballerina proves to be a compelling option for building high-performance, scalable distributed applications.
