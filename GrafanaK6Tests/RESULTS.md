@@ -150,6 +150,29 @@ For this test, a stepping thread group was used, in order to increase the number
 | Java            | HTTP 1.1 | 6356              |
 | Java            | HTTP 2   | 7757              |
 
+### Startup times:
+
+Each technology was tested 10 times and bellow are the average startup times for each service.
+
+#### API Gateway
+
+| Technology      | Average Startup Time (ms) |
+|-----------------|---------------------------|
+| Ballerina (AOT) | ~0.066                    |
+| Ballerina       | ~0.635                    |
+| Java (AOT)      | ~0.088                    |
+| Java            | ~1.408                    |
+
+#### User Microservice
+
+| Technology      | Average Startup Time |
+|-----------------|----------------------|
+| Ballerina (AOT) | ~0.081 s             |
+| Ballerina       | ~0.818 s             |
+| Java (AOT)      | ~0.228 s             |
+| Java            | ~3.015 s             |
+
+
 # Results Analysis
 
 ## General Performance
@@ -169,11 +192,16 @@ Proving that Ballerina can be a good candidate for distributed systems, as it ca
 
 As for the both HTTP protocols, as expected, HTTP/2.0 has a better performance than HTTP/1.1 in all the cases, as it has features that allow the server to handle more requests at the same time, leading to a better performance in all the cases.
 
+## Startup times
+
+With the AOT compilation, Ballerina demonstrates a mean time of ~66ms to launch the API Gateway application, decreasing its startup time by ~89.6%.
+
 ## Conclusion
 
 The performance tests indicate that Ballerina is a strong candidate for distributed systems, particularly when using AOT compilation with HTTP/2. The results suggest the following:
  - Efficiency: Ballerina provides faster response times and can handle more concurrent users compared to Java, making it a robust choice for high-load scenarios.
  - Scalability: The superior performance of Ballerina in stress tests indicates its ability to scale effectively without significant degradation in performance.
  - Protocol Utilization: Ballerina better utilizes HTTP/2 advantages, further enhancing its performance edge over Java.
+ - Compilation: AOT compilation significantly reduces Ballerina's startup time, making it a more efficient choice for applications requiring frequent restarts. Besides, it also improves the performance of the application.
 
 Given these points, Ballerina proves to be a compelling option for building high-performance, scalable distributed applications.
