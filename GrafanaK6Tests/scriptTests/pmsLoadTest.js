@@ -19,12 +19,12 @@ export const options = {
   summaryTimeUnit: "ms",
   insecureSkipTLSVerify: true,
   duration: '30s',
-  vus: 100,
+  vus: 10,
 };
 
 export default function() {
-  const isHttp2 = false;
-  let authToken = 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwicm9sZSI6IlNVUEVSVklTT1IiLCJleHAiOjE3MjIxNjE4Nzd9.7g9RLZB1vJgafpbgdW7t5znO3I_3a5KJZrUlm_oIYZo';
+  const isHttp2 = true;
+  let authToken = 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwicm9sZSI6IlNVUEVSVklTT1IiLCJleHAiOjE3MjQzNjI4NTh9.1g7qaFPAQylW0kWerSAK01XaCOrz1uUIRnf1mLfGQbA';
   let checkResult;
   let res;
   let headers = {

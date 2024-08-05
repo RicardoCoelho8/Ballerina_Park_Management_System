@@ -50,105 +50,105 @@ Bellow are the results obtained from the tests:
 #### 1 - API Gateway - Ballerina (AOT)
 
 | User MCS Technology | Protocol | Configuration | Average (ms) | Max (ms) | Median (ms) | Min (ms) | 90% Line (ms) | 95% Line (ms) | Error (%) | Throughput (s) |
-|---------------------|----------|---------------|--------------|----------|-------------|----------|---------------|---------------|-----------|----------------|
-| Ballerina (AOT)     | HTTP 1.1 | 1             | 7.49         | 24.02    | 5.84        | 2.58     | 18.61         | 22.13         | 0.000     | 9.86           |
-| Ballerina (AOT)     | HTTP 2   | 1             | 6.26         | 12.41    | 5.76        | 2.64     | 9.76          | 10.98         | 0.000     | 9.91           |
-| Ballerina           | HTTP 1.1 | 1             | 9.32         | 19.59    | 8.58        | 4.32     | 13.85         | 16.14         | 0.000     | 9.84           |
-| Ballerina           | HTTP 2   | 1             | 6.95         | 20.70    | 6.45        | 3.17     | 9.23          | 14.55         | 0.000     | 9.89           |
-| Java (AOT)          | HTTP 1.1 | 1             | 21.76        | 49.28    | 19.77       | 11.81    | 32.70         | 45.21         | 0.000     | 9.71           |
-| Java (AOT)          | HTTP 2   | 1             | 20.35        | 44.02    | 18.31       | 12.32    | 35.90         | 36.85         | 0.000     | 9.80           |
-| Java                | HTTP 1.1 | 1             | 22.15        | 63.07    | 19.09       | 12.68    | 30.86         | 56.69         | 0.000     | 9.72           |
-| Java                | HTTP 2   | 1             | 20.85        | 43.71    | 18.86       | 10.85    | 28.69         | 39.77         | 0.000     | 9.77           |
+|:-------------------:|:--------:|:-------------:|-------------:|---------:|------------:|---------:|--------------:|--------------:|----------:|---------------:|
+|   Ballerina (AOT)   | HTTP 1.1 |       1       |         7.53 |    17.39 |        5.54 |     2.60 |         14.21 |         15.68 |     0.000 |           9.86 |
+|   Ballerina (AOT)   |  HTTP 2  |       1       |         7.06 |    15.10 |        6.36 |     2.62 |         10.95 |         12.82 |     0.000 |           9.91 |
+|      Ballerina      | HTTP 1.1 |       1       |         9.63 |    21.91 |       10.43 |     3.11 |         13.76 |         18.35 |     0.000 |           9.84 |
+|      Ballerina      |  HTTP 2  |       1       |         8.57 |    20.86 |        7.21 |     3.20 |         15.35 |         16.99 |     0.000 |           9.89 |
+|     Java (AOT)      | HTTP 1.1 |       1       |        17.74 |    32.16 |       16.89 |    11.67 |         22.55 |         26.74 |     0.000 |           9.71 |
+|     Java (AOT)      |  HTTP 2  |       1       |        16.83 |    26.58 |       16.23 |    11.12 |         21.98 |         22.65 |     0.000 |           9.80 |
+|        Java         | HTTP 1.1 |       1       |        19.47 |    48.72 |       16.23 |    12.38 |         25.93 |         36.37 |     0.000 |           9.72 |
+|        Java         |  HTTP 2  |       1       |        17.57 |    31.95 |       16.01 |    10.18 |         24.47 |         27.14 |     0.000 |           9.77 |
 | ------------------- | -------- | ------------- | ------------ | -------- | ----------- | -------- | ------------- | ------------- | --------- | -------------- |
-| Ballerina (AOT)     | HTTP 1.1 | 2             | 11.84        | 42.66    | 9.70        | 2.62     | 22.98         | 31.26         | 0.000     | 98.82          |
-| Ballerina (AOT)     | HTTP 2   | 2             | 11.42        | 37.92    | 8.06        | 2.58     | 23.71         | 29.65         | 0.000     | 98.90          |
-| Ballerina           | HTTP 1.1 | 2             | 11.21        | 35.76    | 9.40        | 2.64     | 19.84         | 24.92         | 0.000     | 98.28          |
-| Ballerina           | HTTP 2   | 2             | 10.48        | 58.58    | 10.58       | 2.07     | 24.93         | 29.75         | 0.000     | 98.29          |
-| Java (AOT)          | HTTP 1.1 | 2             | 39.19        | 364.19   | 32.40       | 10.73    | 56.02         | 66.45         | 0.000     | 95.23          |
-| Java (AOT)          | HTTP 2   | 2             | 36.54        | 354.18   | 29.33       | 10.36    | 57.16         | 62.29         | 0.000     | 96.74          |
-| Java                | HTTP 1.1 | 2             | 24.70        | 129.36   | 22.87       | 11.05    | 36.31         | 41.29         | 0.000     | 96.87          |
-| Java                | HTTP 2   | 2             | 21.50        | 128.63   | 18.23       | 10.84    | 30.24         | 37.20         | 0.000     | 97.20          |
+|   Ballerina (AOT)   | HTTP 1.1 |       2       |        11.98 |    47.84 |        9.62 |     2.61 |         23.21 |         26.79 |     0.000 |          98.82 |
+|   Ballerina (AOT)   |  HTTP 2  |       2       |        11.28 |    45.66 |        9.31 |     2.06 |         21.58 |         23.58 |     0.000 |          98.90 |
+|      Ballerina      | HTTP 1.1 |       2       |        13.30 |    39.55 |       12.06 |     3.10 |         22.92 |         28.24 |     0.000 |          98.28 |
+|      Ballerina      |  HTTP 2  |       2       |        12.43 |    37.59 |       11.19 |     3.09 |         22.12 |         24.94 |     0.000 |          98.29 |
+|     Java (AOT)      | HTTP 1.1 |       2       |        37.31 |   397.75 |       29.11 |    10.36 |         54.83 |         70.40 |     0.000 |          95.23 |
+|     Java (AOT)      |  HTTP 2  |       2       |        36.19 |   384.36 |       26.78 |    10.35 |         50.90 |         65.62 |     0.000 |          96.74 |
+|        Java         | HTTP 1.1 |       2       |        22.29 |   156.76 |       16.38 |    10.57 |         33.00 |         37.66 |     0.000 |          96.87 |
+|        Java         |  HTTP 2  |       2       |        20.25 |   138.57 |       16.08 |     9.69 |         28.26 |         36.05 |     0.000 |          97.20 |
 
 #### 2 - API Gateway - Ballerina
 
 | User MCS Technology | Protocol | Configuration | Average (ms) | Max (ms) | Median (ms) | Min (ms) | 90% Line (ms) | 95% Line (ms) | Error (%) | Throughput (s) |
-|---------------------|----------|---------------|--------------|----------|-------------|----------|---------------|---------------|-----------|----------------|
-| Ballerina (AOT)     | HTTP 1.1 | 1             | 8.71         | 18.64    | 7.51        | 3.94     | 13.45         | 15.35         | 0.000     | 9.85           |
-| Ballerina (AOT)     | HTTP 2   | 1             | 7.88         | 18.38    | 6.73        | 3.17     | 12.38         | 14.76         | 0.000     | 9.87           |
-| Ballerina           | HTTP 1.1 | 1             | 10.11        | 14.74    | 10.15       | 5.31     | 13.03         | 13.54         | 0.000     | 9.80           |
-| Ballerina           | HTTP 2   | 1             | 9.77         | 14.62    | 8.90        | 3.35     | 12.76         | 13.05         | 0.000     | 9.83           |
-| Java (AOT)          | HTTP 1.1 | 1             | 23.05        | 46.45    | 18.84       | 11.81    | 38.20         | 40.99         | 0.000     | 9.68           |
-| Java (AOT)          | HTTP 2   | 1             | 20.89        | 47.35    | 19.20       | 10.84    | 32.99         | 39.12         | 0.000     | 9.78           |
-| Java                | HTTP 1.1 | 1             | 23.74        | 41.67    | 21.57       | 12.50    | 38.58         | 40.04         | 0.000     | 9.69           |
-| Java                | HTTP 2   | 1             | 22.56        | 32.51    | 17.97       | 11.61    | 23.62         | 27.06         | 0.000     | 9.75           |
+|:-------------------:|:--------:|:-------------:|-------------:|---------:|------------:|---------:|--------------:|--------------:|----------:|---------------:|
+|   Ballerina (AOT)   | HTTP 1.1 |       1       |         9.02 |    14.63 |        8.76 |     4.16 |         12.81 |         13.44 |     0.000 |           9.85 |
+|   Ballerina (AOT)   |  HTTP 2  |       1       |         8.56 |    13.82 |        7.84 |     4.98 |         12.61 |         13.31 |     0.000 |           9.87 |
+|      Ballerina      | HTTP 1.1 |       1       |        10.38 |    16.55 |       10.07 |     6.87 |         14.49 |         15.17 |     0.000 |           9.80 |
+|      Ballerina      |  HTTP 2  |       1       |         9.46 |    16.13 |        9.04 |     6.42 |         11.84 |         12.81 |     0.000 |           9.83 |
+|     Java (AOT)      | HTTP 1.1 |       1       |        19.61 |    31.69 |       18.04 |    13.51 |         28.09 |         29.46 |     0.000 |           9.72 |
+|     Java (AOT)      |  HTTP 2  |       1       |        17.27 |    48.73 |       15.97 |    13.19 |         19.07 |         20.27 |     0.000 |           9.78 |
+|        Java         | HTTP 1.1 |       1       |        20.75 |    54.13 |       16.22 |    12.07 |         42.22 |         46.43 |     0.000 |           9.68 |
+|        Java         |  HTTP 2  |       1       |        19.48 |    51.53 |       15.08 |    11.29 |         43.90 |         46.77 |     0.000 |           9.75 |
 | ------------------- | -------- | ------------- | ------------ | -------- | ----------- | -------- | ------------- | ------------- | --------- | -------------- |
-| Ballerina (AOT)     | HTTP 1.1 | 2             | 14.83        | 37.88    | 15.33       | 2.63     | 25.26         | 29.35         | 0.000     | 98.80          |
-| Ballerina (AOT)     | HTTP 2   | 2             | 14.12        | 37.00    | 11.44       | 2.05     | 27.17         | 33.00         | 0.000     | 98.85          |
-| Ballerina           | HTTP 1.1 | 2             | 13.93        | 33.91    | 13.09       | 2.62     | 22.86         | 25.60         | 0.000     | 98.04          |
-| Ballerina           | HTTP 2   | 2             | 12.90        | 33.23    | 11.89       | 2.54     | 22.32         | 25.31         | 0.000     | 98.16          |
-| Java (AOT)          | HTTP 1.1 | 2             | 39.54        | 344.61   | 31.39       | 9.73     | 61.73         | 88.06         | 0.000     | 93.83          |
-| Java (AOT)          | HTTP 2   | 2             | 38.89        | 357.16   | 34.71       | 10.31    | 64.50         | 76.98         | 0.000     | 96.06          |
-| Java                | HTTP 1.1 | 2             | 25.88        | 139.69   | 22.24       | 9.57     | 38.63         | 60.75         | 0.000     | 96.64          |
-| Java                | HTTP 2   | 2             | 24.90        | 138.83   | 21.52       | 11.51    | 35.56         | 43.47         | 0.000     | 96.71          |
+|   Ballerina (AOT)   | HTTP 1.1 |       2       |        13.37 |    35.39 |       12.17 |     3.09 |         22.92 |         26.94 |     0.000 |          98.80 |
+|   Ballerina (AOT)   |  HTTP 2  |       2       |        12.76 |    40.43 |       11.85 |     3.12 |         22.00 |         25.55 |     0.000 |          98.85 |
+|      Ballerina      | HTTP 1.1 |       2       |        14.88 |    38.60 |       14.12 |     4.49 |         23.03 |         24.98 |     0.000 |          98.04 |
+|      Ballerina      |  HTTP 2  |       2       |        13.68 |    39.79 |       12.98 |     2.80 |         21.38 |         25.37 |     0.000 |          98.16 |
+|     Java (AOT)      | HTTP 1.1 |       2       |        39.56 |   385.78 |       30.73 |    10.49 |         52.88 |         70.14 |     0.000 |          93.83 |
+|     Java (AOT)      |  HTTP 2  |       2       |        38.68 |   400.90 |       27.12 |    10.72 |         58.74 |         68.67 |     0.000 |          96.06 |
+|     Java (AOT)      |  HTTP 2  |       2       |        26.66 |   185.45 |       21.04 |    12.17 |         38.71 |         49.65 |     0.000 |          96.64 |
+|        Java         |  HTTP 2  |       2       |        24.84 |   132.41 |       23.09 |     9.85 |         35.35 |         38.61 |     0.000 |          96.71 |
 
 #### 3 - API Gateway - Java (AOT)
 
 | User MCS Technology | Protocol | Configuration | Average (ms) | Max (ms) | Median (ms) | Min (ms) | 90% Line (ms) | 95% Line (ms) | Error (%) | Throughput (s) |
-|---------------------|----------|---------------|--------------|----------|-------------|----------|---------------|---------------|-----------|----------------|
-| Ballerina (AOT)     | HTTP 1.1 | 1             | 7.63         | 18.15    | 7.94        | 2.13     | 10.61         | 11.12         | 0.000     | 9.85           |
-| Ballerina (AOT)     | HTTP 2   | 1             | 7.50         | 15.56    | 7.56        | 3.22     | 12.07         | 12.74         | 0.000     | 9.87           |
-| Ballerina           | HTTP 1.1 | 1             | 10.64        | 19.88    | 10.57       | 4.76     | 13.07         | 15.86         | 0.000     | 9.80           |
-| Ballerina           | HTTP 2   | 1             | 9.66         | 18.24    | 9.97        | 3.65     | 12.21         | 15.09         | 0.000     | 9.82           |
-| Java (AOT)          | HTTP 1.1 | 1             | 22.77        | 39.31    | 23.77       | 11.75    | 33.23         | 35.78         | 0.000     | 9.70           |
-| Java (AOT)          | HTTP 2   | 1             | 20.65        | 46.20    | 17.35       | 10.45    | 37.95         | 40.46         | 0.000     | 9.74           |
-| Java                | HTTP 1.1 | 1             | 25.70        | 45.18    | 22.83       | 13.09    | 37.09         | 37.84         | 0.000     | 9.68           |
-| Java                | HTTP 2   | 1             | 21.44        | 44.26    | 20.03       | 11.78    | 29.96         | 40.85         | 0.000     | 9.73           |
+|:-------------------:|:--------:|:-------------:|-------------:|---------:|------------:|---------:|--------------:|--------------:|----------:|---------------:|
+|   Ballerina (AOT)   | HTTP 1.1 |       1       |         9.14 |    15.10 |        8.16 |     2.59 |         14.55 |         14.62 |     0.000 |           9.85 |
+|   Ballerina (AOT)   |  HTTP 2  |       1       |         8.40 |    22.65 |        8.70 |     2.06 |         12.85 |         14.25 |     0.000 |           9.87 |
+|      Ballerina      | HTTP 1.1 |       1       |        10.09 |    17.24 |        9.69 |     3.14 |         14.27 |         15.93 |     0.000 |           9.80 |
+|      Ballerina      |  HTTP 2  |       1       |         9.25 |    18.44 |        9.00 |     3.64 |         13.35 |         16.04 |     0.000 |           9.82 |
+|     Java (AOT)      | HTTP 1.1 |       1       |        18.65 |    46.18 |       18.61 |    13.66 |         21.25 |         22.83 |     0.000 |           9.70 |
+|     Java (AOT)      |  HTTP 2  |       1       |        17.98 |    53.96 |       14.11 |    11.43 |         29.05 |         35.07 |     0.000 |           9.74 |
+|        Java         | HTTP 1.1 |       1       |        20.50 |    43.37 |       19.09 |    11.01 |         28.70 |         42.79 |     0.000 |           9.68 |
+|        Java         |  HTTP 2  |       1       |        18.63 |    41.83 |       16.50 |     9.85 |         28.77 |         31.98 |     0.000 |           9.73 |
 | ------------------- | -------- | ------------- | ------------ | -------- | ----------- | -------- | ------------- | ------------- | --------- | -------------- |
-| Ballerina (AOT)     | HTTP 1.1 | 2             | 12.06        | 39.22    | 10.57       | 2.07     | 20.88         | 25.40         | 0.000     | 62.33          |
-| Ballerina (AOT)     | HTTP 2   | 2             | 11.61        | 39.56    | 9.73        | 2.10     | 21.86         | 25.74         | 0.000     | 70.91          |
-| Ballerina           | HTTP 1.1 | 2             | 12.90        | 41.58    | 11.73       | 2.09     | 22.32         | 26.72         | 0.000     | 65.51          |
-| Ballerina           | HTTP 2   | 2             | 11.12        | 47.62    | 10.00       | 2.07     | 18.66         | 24.23         | 0.000     | 74.13          |
-| Java (AOT)          | HTTP 1.1 | 2             | 40.02        | 341.86   | 31.63       | 9.24     | 62.24         | 71.90         | 0.000     | 94.36          |
-| Java (AOT)          | HTTP 2   | 2             | 38.97        | 336.74   | 29.09       | 9.90     | 66.19         | 66.31         | 0.000     | 94.82          |
-| Java                | HTTP 1.1 | 2             | 26.24        | 118.46   | 23.06       | 10.40    | 40.07         | 44.27         | 0.000     | 96.75          |
-| Java                | HTTP 2   | 2             | 23.99        | 126.94   | 22.34       | 10.29    | 35.91         | 44.08         | 0.000     | 97.03          |
+|   Ballerina (AOT)   | HTTP 1.1 |       2       |        12.41 |    42.98 |       10.35 |     1.55 |         24.44 |         28.02 |     0.000 |          62.33 |
+|   Ballerina (AOT)   |  HTTP 2  |       2       |        11.57 |    48.12 |        8.02 |     2.11 |         24.74 |         31.00 |     0.000 |          70.91 |
+|      Ballerina      | HTTP 1.1 |       2       |        13.70 |    79.02 |       11.66 |     3.11 |         20.65 |         27.14 |     0.000 |          70.31 |
+|      Ballerina      |  HTTP 2  |       2       |        12.58 |    35.00 |       10.72 |     2.60 |         23.32 |         28.69 |     0.000 |          74.13 |
+|     Java (AOT)      | HTTP 1.1 |       2       |        39.53 |   348.10 |       32.56 |     9.27 |         63.31 |         77.18 |     0.000 |          94.36 |
+|     Java (AOT)      |  HTTP 2  |       2       |        37.04 |   369.60 |       27.97 |     9.89 |         57.52 |         74.26 |     0.000 |          94.82 |
+|        Java         | HTTP 1.1 |       2       |        26.26 |   147.60 |       22.48 |    10.91 |         35.26 |         43.81 |     0.000 |          96.75 |
+|        Java         |  HTTP 2  |       2       |        23.56 |    93.51 |       22.21 |    10.81 |         33.37 |         41.41 |     0.000 |          97.03 |
 
 #### 4 - API Gateway - Java
 
 | User MCS Technology | Protocol | Configuration | Average (ms) | Max (ms) | Median (ms) | Min (ms) | 90% Line (ms) | 95% Line (ms) | Error (%) | Throughput (s) |
-|---------------------|----------|---------------|--------------|----------|-------------|----------|---------------|---------------|-----------|----------------|
-| Ballerina (AOT)     | HTTP 1.1 | 1             | 9.30         | 19.60    | 8.98        | 4.29     | 12.92         | 14.81         | 0.000     | 9.82           |
-| Ballerina (AOT)     | HTTP 2   | 1             | 8.38         | 18.15    | 7.83        | 3.15     | 13.87         | 17.27         | 0.000     | 9.86           |
-| Ballerina           | HTTP 1.1 | 1             | 11.45        | 25.41    | 10.50       | 4.48     | 17.88         | 20.45         | 0.000     | 9.78           |
-| Ballerina           | HTTP 2   | 1             | 10.99        | 23.64    | 10.72       | 4.30     | 15.48         | 16.69         | 0.000     | 9.79           |
-| Java (AOT)          | HTTP 1.1 | 1             | 23.34        | 41.67    | 23.01       | 11.31    | 34.09         | 37.83         | 0.000     | 9.67           |
-| Java (AOT)          | HTTP 2   | 1             | 21.25        | 41.28    | 21.46       | 11.88    | 27.20         | 30.49         | 0.000     | 9.72           |
-| Java                | HTTP 1.1 | 1             | 25.79        | 47.61    | 24.36       | 15.92    | 34.22         | 42.73         | 0.000     | 9.67           |
-| Java                | HTTP 2   | 1             | 23.67        | 39.17    | 21.85       | 11.89    | 36.66         | 38.11         | 0.000     | 9.70           |
+|:-------------------:|:--------:|:-------------:|-------------:|---------:|------------:|---------:|--------------:|--------------:|----------:|---------------:|
+|   Ballerina (AOT)   | HTTP 1.1 |       1       |         9.86 |    33.56 |        9.34 |     4.76 |         14.37 |         23.27 |     0.000 |           9.82 |
+|   Ballerina (AOT)   |  HTTP 2  |       1       |         9.00 |    18.69 |        8.77 |     4.49 |         13.29 |         14.79 |     0.000 |           9.86 |
+|      Ballerina      | HTTP 1.1 |       1       |        11.16 |    20.18 |       11.10 |     4.35 |         17.49 |         18.64 |     0.000 |           9.78 |
+|      Ballerina      |  HTTP 2  |       1       |        10.21 |    25.00 |        8.85 |     4.16 |         16.78 |         20.52 |     0.000 |           9.79 |
+|     Java (AOT)      | HTTP 1.1 |       1       |        20.57 |    55.49 |       16.36 |    11.81 |         31.84 |         44.82 |     0.000 |           9.67 |
+|     Java (AOT)      |  HTTP 2  |       1       |        19.56 |    52.26 |       16.64 |    11.51 |         29.04 |         35.59 |     0.000 |           9.72 |
+|        Java         | HTTP 1.1 |       1       |        21.84 |    35.83 |       21.22 |    12.67 |         28.13 |         34.02 |     0.000 |           9.67 |
+|        Java         |  HTTP 2  |       1       |        20.38 |    38.75 |       20.39 |    12.40 |         25.49 |         29.35 |     0.000 |           9.70 |
 | ------------------- | -------- | ------------- | ------------ | -------- | ----------- | -------- | ------------- | ------------- | --------- | -------------- |
-| Ballerina (AOT)     | HTTP 1.1 | 2             | 15.02        | 64.53    | 13.57       | 3.17     | 22.35         | 28.36         | 0.000     | 56.23          |
-| Ballerina (AOT)     | HTTP 2   | 2             | 14.69        | 62.75    | 12.97       | 2.64     | 24.32         | 30.69         | 0.000     | 64.29          |
-| Ballerina           | HTTP 1.1 | 2             | 14.25        | 78.55    | 12.37       | 3.83     | 22.20         | 29.63         | 0.000     | 59.66          |
-| Ballerina           | HTTP 2   | 2             | 13.27        | 70.63    | 12.54       | 3.08     | 19.16         | 21.39         | 0.000     | 67.62          |
-| Java (AOT)          | HTTP 1.1 | 2             | 40.78        | 328.10   | 34.47       | 9.97     | 56.12         | 66.46         | 0.000     | 93.76          |
-| Java (AOT)          | HTTP 2   | 2             | 39.47        | 313.21   | 30.82       | 9.94     | 57.45         | 85.23         | 0.000     | 94.19          |
-| Java                | HTTP 1.1 | 2             | 27.71        | 141.98   | 23.33       | 11.53    | 46.07         | 50.36         | 0.000     | 95.75          |
-| Java                | HTTP 2   | 2             | 26.87        | 140.27   | 23.32       | 11.38    | 44.63         | 47.67         | 0.000     | 96.71          |
+|   Ballerina (AOT)   | HTTP 1.1 |       2       |        14.03 |    54.50 |       11.75 |     2.97 |         24.15 |         39.11 |     0.000 |          59.66 |
+|   Ballerina (AOT)   |  HTTP 2  |       2       |        13.30 |    53.44 |       12.67 |     2.58 |         20.98 |         23.57 |     0.000 |          67.62 |
+|      Ballerina      | HTTP 1.1 |       2       |        15.59 |    66.02 |       13.51 |     3.10 |         23.45 |         34.11 |     0.000 |          56.23 |
+|      Ballerina      |  HTTP 2  |       2       |        15.40 |    57.68 |       14.07 |     4.37 |         20.35 |         29.92 |     0.000 |          64.29 |
+|     Java (AOT)      | HTTP 1.1 |       2       |        40.76 |   471.07 |       31.33 |     9.86 |         63.16 |         92.52 |     0.000 |          93.76 |
+|     Java (AOT)      |  HTTP 2  |       2       |        40.64 |   342.63 |       33.59 |     8.27 |         64.89 |         71.64 |     0.000 |          94.19 |
+|        Java         | HTTP 1.1 |       2       |        27.71 |   140.91 |       23.24 |    11.88 |         42.36 |         54.81 |     0.000 |          96.62 |
+|        Java         |  HTTP 2  |       2       |        26.92 |   128.82 |       24.18 |    12.26 |         35.56 |         39.71 |     0.000 |          96.71 |
 
 ### System Stress Test requests
 
 For this test, a stepping thread group was used, in order to increase the number of threads overtime, starting with 1 till the first timeout error is reached.
 
 | Technology      | Protocol | Max Number of VUs |
-|-----------------|----------|-------------------|
-| Ballerina (AOT) | HTTP 1.1 | 9579              |
-| Ballerina (AOT) | HTTP 2   | 11373             |
-| Ballerina       | HTTP 1.1 | 8381              |
-| Ballerina       | HTTP 2   | 9172              |
-| Java (AOT)      | HTTP 1.1 | 7644              |
-| Java (AOT)      | HTTP 2   | 8984              |
-| Java            | HTTP 1.1 | 6356              |
-| Java            | HTTP 2   | 7757              |
+|-----------------|----------|------------------:|
+| Ballerina (AOT) | HTTP 1.1 |             9.579 |
+| Ballerina (AOT) | HTTP 2   |            11.373 |
+| Ballerina       | HTTP 1.1 |             8.381 |
+| Ballerina       | HTTP 2   |             9.172 |
+| Java (AOT)      | HTTP 1.1 |             7.644 |
+| Java (AOT)      | HTTP 2   |             8.984 |
+| Java            | HTTP 1.1 |             6.356 |
+| Java            | HTTP 2   |             7.757 |
 
 ### Startup times:
 
@@ -181,16 +181,16 @@ This analysis compares the response times of Ballerina's performance compared to
 
 By analysing the load test tables it can be seen that Ballerina in general as better performance than Java, when focusing on the first configuration with 10 users simultaneously, Ballerina has a better performance in all cases in response times and throughput. 
 In the second configuration with 100 users simultaneously, Ballerina still has a better performance in terms of response times, although the throughput is lower than Java when the API Gateway is implemented in Java. 
-Leading to the conclusion that Ballerina has a better performance when communicating with other Ballerina services.
+Leading to the conclusion that Ballerina has a better performance than Java when communicating with other services implemented in different technologies for scenarios with high load.
 
 ## Stress Test
 
-From the system stress test, the conclusion is that Ballerina with its AOT compilation and HTTP/2 protocol has the best performance in scenarios of high load. It can handle more 24% of users at the same time as Java with the same configuration.
+From the system stress test, the conclusion is that Ballerina with its AOT compilation and HTTP/2 protocol has the best performance in scenarios of high load. It can handle more ~24% of users at the same time as Java with the same configuration.
 Proving that Ballerina can be a good candidate for distributed systems, as it can handle several users at the same time in scenarios of high load, like black friday sales and other high traffic events.
 
 ## HTTP/1.1 vs HTTP/2.0
 
-As for the both HTTP protocols, as expected, HTTP/2.0 has a better performance than HTTP/1.1 in all the cases, as it has features that allow the server to handle more requests at the same time, leading to a better performance in all the cases.
+As for the both HTTP protocols, as expected, HTTP/2.0 has a better performance than HTTP/1.1 in all the cases, that behaviour was expected as it has features that allow the server to handle more requests at the same time, leading to a better performance in all the cases.
 
 ## Startup times
 
@@ -201,7 +201,7 @@ With the AOT compilation, Ballerina demonstrates a mean time of ~66ms to launch 
 The performance tests indicate that Ballerina is a strong candidate for distributed systems, particularly when using AOT compilation with HTTP/2. The results suggest the following:
  - Efficiency: Ballerina provides faster response times and can handle more concurrent users compared to Java, making it a robust choice for high-load scenarios.
  - Scalability: The superior performance of Ballerina in stress tests indicates its ability to scale effectively without significant degradation in performance.
- - Protocol Utilization: Ballerina better utilizes HTTP/2 advantages, further enhancing its performance edge over Java.
+ - Protocol Utilization: Ballerina utilizes HTTP/2 advantages, further enhancing its performance edge over Java.
  - Compilation: AOT compilation significantly reduces Ballerina's startup time, making it a more efficient choice for applications requiring frequent restarts. Besides, it also improves the performance of the application.
 
-Given these points, Ballerina proves to be a compelling option for building high-performance, scalable distributed applications.
+Given these points, Ballerina proves to be a compelling option for building high-performance and scalable distributed applications.

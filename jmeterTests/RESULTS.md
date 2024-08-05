@@ -38,13 +38,13 @@ the last 4 threads are configured to simulate 1000 users. The test was configure
 
 | Technology              | Protocol | Endpoint                                   |
 |-------------------------|----------|--------------------------------------------|
-| Ballerina GraalVM (AOT) | HTTP 1.1 | `http://localhost:9090/users/getAllUsers`  |
+| Ballerina GraalVM (AOT) | HTTP 1.1 | `https://localhost:9090/users/getAllUsers` |
 | Ballerina GraalVM (AOT) | HTTP 2   | `https://localhost:9090/users/getAllUsers` |
-| Ballerina               | HTTP 1.1 | `http://localhost:9090/users/getAllUsers`  |
+| Ballerina               | HTTP 1.1 | `https://localhost:9090/users/getAllUsers` |
 | Ballerina               | HTTP 2   | `https://localhost:9090/users/getAllUsers` |
-| Java (AOT)              | HTTP 1.1 | `http://localhost:8080/users/getAllUsers`  |
+| Java (AOT)              | HTTP 1.1 | `https://localhost:8080/users/getAllUsers` |
 | Java (AOT)              | HTTP 2   | `https://localhost:8080/users/getAllUsers` |
-| Java                    | HTTP 1.1 | `http://localhost:8080/users/getAllUsers`  |
+| Java                    | HTTP 1.1 | `https://localhost:8080/users/getAllUsers` |
 | Java                    | HTTP 2   | `https://localhost:8080/users/getAllUsers` |
 
 ## Results

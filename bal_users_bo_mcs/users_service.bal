@@ -72,6 +72,7 @@ isolated service /users on apiListener{
             response.setPayload("Conflict");
             return caller->respond(response);
         }else {
+            log:printInfo("sending response");
             response.statusCode = 200;
             response.setJsonPayload(result);
             return caller->respond(response);

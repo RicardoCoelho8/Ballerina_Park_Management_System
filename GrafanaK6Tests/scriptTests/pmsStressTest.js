@@ -23,7 +23,7 @@ export const options = {
 
 export default function() {
   const isHttp2 = true;
-  let authToken = 'Bearer eyJhbGciOiJIUzI1NiIsICJ0eXAiOiJKV1QifQ.eyJzdWIiOiIxIiwgImV4cCI6MTcyMTM1NzkwNSwgIm5iZiI6MTcyMTM1MTkwNSwgImlhdCI6MTcyMTM1MTkwNSwgInJvbGUiOiJTVVBFUlZJU09SIn0.54saM2eNwQrZU1tMn_cDXy67nvWU3GOf-a5CU2XDL3g';
+  let authToken = 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwicm9sZSI6IlNVUEVSVklTT1IiLCJleHAiOjE3MjIxNjE4Nzd9.7g9RLZB1vJgafpbgdW7t5znO3I_3a5KJZrUlm_oIYZo';
   let checkResult;
   let res;
   let headers = {
@@ -58,11 +58,14 @@ export function handleSummary(data) {
   const duration = data.metrics.iteration_duration.sum / 1000; // Convert to seconds
   const throughput = requests / duration;
 
+  console.log(`Requests: ${requests}`);
+  console.log(`Duration: ${duration.toFixed(2)}s`);
+  console.log(`Throughput: ${throughput.toFixed(2)} reqs/s`);
+
   // Add the throughput metric to the data
   data.throughput = throughput;
 
   return {
-    "results/stressTest.html": htmlReport(data),
-    stdout: `Throughput: ${throughput} requests/sec`,
+    "results/stressTest.html": htmlReport(data)
   };
 }
