@@ -141,14 +141,14 @@ For this test, a stepping thread group was used, in order to increase the number
 
 | Technology      | Protocol | Max Number of VUs |
 |-----------------|----------|------------------:|
-| Ballerina (AOT) | HTTP 1.1 |             9.579 |
-| Ballerina (AOT) | HTTP 2   |            11.373 |
-| Ballerina       | HTTP 1.1 |             8.381 |
-| Ballerina       | HTTP 2   |             9.172 |
-| Java (AOT)      | HTTP 1.1 |             7.644 |
-| Java (AOT)      | HTTP 2   |             8.984 |
-| Java            | HTTP 1.1 |             6.356 |
-| Java            | HTTP 2   |             7.757 |
+| Ballerina (AOT) | HTTP 1.1 |             9,579 |
+| Ballerina (AOT) | HTTP 2   |            11,373 |
+| Ballerina       | HTTP 1.1 |             8,381 |
+| Ballerina       | HTTP 2   |             9,172 |
+| Java (AOT)      | HTTP 1.1 |             7,644 |
+| Java (AOT)      | HTTP 2   |             8,984 |
+| Java            | HTTP 1.1 |             6,356 |
+| Java            | HTTP 2   |             7,757 |
 
 ### Startup times:
 
@@ -157,20 +157,20 @@ Each technology was tested 10 times and bellow are the average startup times for
 #### API Gateway
 
 | Technology      | Average Startup Time (ms) |
-|-----------------|---------------------------|
-| Ballerina (AOT) | ~0.066                    |
-| Ballerina       | ~0.635                    |
-| Java (AOT)      | ~0.088                    |
-| Java            | ~1.408                    |
+|-----------------|--------------------------:|
+| Ballerina (AOT) |                    ~0.066 |
+| Ballerina       |                    ~0.635 |
+| Java (AOT)      |                    ~0.088 |
+| Java            |                    ~1.408 |
 
 #### User Microservice
 
-| Technology      | Average Startup Time |
-|-----------------|----------------------|
-| Ballerina (AOT) | ~0.081 s             |
-| Ballerina       | ~0.818 s             |
-| Java (AOT)      | ~0.228 s             |
-| Java            | ~3.015 s             |
+| Technology      | Average Startup Time (s) |
+|-----------------|-------------------------:|
+| Ballerina (AOT) |                   ~0.081 |
+| Ballerina       |                   ~0.818 |
+| Java (AOT)      |                   ~0.228 |
+| Java            |                   ~3.015 |
 
 
 # Results Analysis
@@ -179,7 +179,7 @@ Each technology was tested 10 times and bellow are the average startup times for
 
 This analysis compares the response times of Ballerina's performance compared to Java.
 
-By analysing the load test tables it can be seen that Ballerina in general as better performance than Java, when focusing on the first configuration with 10 users simultaneously, Ballerina has a better performance in all cases in response times and throughput. 
+By analysing the load test tables it can be seen that Ballerina in general has better performance than Java, when focusing on the first configuration with 10 users simultaneously, Ballerina has a better performance in all cases in response times and throughput. 
 In the second configuration with 100 users simultaneously, Ballerina still has a better performance in terms of response times, although the throughput is lower than Java when the API Gateway is implemented in Java. 
 Leading to the conclusion that Ballerina has a better performance than Java when communicating with other services implemented in different technologies for scenarios with high load.
 

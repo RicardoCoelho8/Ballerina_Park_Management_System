@@ -1,3 +1,0 @@
-Label,# Samples,Average,Min,Max,Std. Dev.,Error %,Throughput,Received KB/sec,Sent KB/sec,Avg. Bytes
-Java HTTP 2 1000 users:bzm - HTTP2 Sampler,10000,10,7,26,1.17,0.000%,100.00300,245.52,0.00,2514.0
-TOTAL,10000,10,7,26,1.17,0.000%,100.00300,245.52,0.00,2514.0

@@ -1,3 +1,0 @@
-Label,# Samples,Average,Median,90% Line,95% Line,99% Line,Min,Max,Error %,Throughput,Received KB/sec,Sent KB/sec
-bzm - HTTP2 Sampler,10000,9,9,11,11,14,6,28,0.000%,100.00800,245.53,0.00
-TOTAL,10000,9,9,11,11,14,6,28,0.000%,100.00800,245.53,0.00
