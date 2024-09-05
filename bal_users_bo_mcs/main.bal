@@ -6,6 +6,7 @@ import ballerinax/postgresql.driver as _;
 
 // jwt configurations -----------------------------------------------------------------------------------
 final string secretKey = "jhewiwrvmqere3";
+final string unhashedPassword = "123PasswordX#";
 
 // DATABASE CONFIGS -------------------------------------------------------------------------------------
 
@@ -759,9 +760,6 @@ public isolated function create(UserOnCreation userOnCreation) returns json|erro
 public isolated function login(UserCredentials UserCredentials) returns json|error? {
     UserRecord queryResult = check userDBClient->queryRow(`select * from app_user where email = ${UserCredentials.email};`);
     UserRecord user = check queryResult.cloneWithType(UserRecord);
-
-    //Since ballerina doesn't support de decode of bcrypt passwords, that validation will be validated hardcoded (default password is "123PasswordX#")
-    string unhashedPassword = "123PasswordX#";
 
     jwt:IssuerConfig issuerConfig = {
         username: user.user_id.toString(),
